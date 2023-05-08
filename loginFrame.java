@@ -207,6 +207,10 @@ public class loginFrame extends JFrame implements ActionListener{
 				else{
 					if(inputUn.equals(defUsername) && inputPsk.equals(defPsk)){
 						JOptionPane.showMessageDialog(null,"Log In Sucessful!", "Access Granted", JOptionPane.INFORMATION_MESSAGE);
+						Dashboard dsh = new Dashboard();
+						dsh.userDashboard();
+
+						dispose();
 					}
 
 					else{
