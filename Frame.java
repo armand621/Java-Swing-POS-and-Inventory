@@ -17,7 +17,7 @@ import javax.swing.event.*;
 public class Frame extends JFrame implements ActionListener{
 	JButton close;
 
-	String[] txtlabels= {"Inventory", "Item Code:", "Item Description:", "Price:", "Size:", "Stocks:", "Re-Order Point:"};
+	String[] txtlabels= {"Inventory", "Item Code:","Item Name", "Item Description:", "Price:", "Size:", "Stocks:", "Re-Order Point:"};
 	JLabel[] labels = new JLabel[txtlabels.length];
 
 	JTextField [] fields = new JTextField[labels.length-1];
@@ -41,7 +41,7 @@ public class Frame extends JFrame implements ActionListener{
 
 	DecimalFormat decfor = new DecimalFormat("00000");
 
-	String[] header = {"Item Code", "Item Description", "Price", "Size", "Stocks", "Re-Order Point", "Remarks"};
+	String[] header = {"Item Code", "Item Name", "Item Description", "Price", "Size", "Stocks", "Re-Order Point", "Remarks"};
 
 	DefaultTableModel defTableModel = new DefaultTableModel(permData,header);
 	JTable table = new JTable(defTableModel);
@@ -57,6 +57,11 @@ public class Frame extends JFrame implements ActionListener{
 	JButton editSave = new JButton();
 
 	JTextField txtSearch;
+	JLabel lblSearch;
+
+	Color gold = new Color(0xFCCB06);
+	Color darkBlue = new Color(0x222E50);
+	Color darkOrange = new Color(0xFF8C00);
 
 
 
@@ -70,6 +75,7 @@ public class Frame extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setUndecorated(true);
+		getContentPane().setBackground(gold);
 
 		//declaring the properties for the close button
 		close = new JButton();
@@ -111,10 +117,13 @@ public class Frame extends JFrame implements ActionListener{
 			fields[a].setBounds(220,fieldY,fieldWidth,fieldHeight);
 			fields[a].setFont(arial15b);
 			fields[a].setEditable(false);
+			fields[a].setOpaque(false);
+			fields[a].setBorder(BorderFactory.createMatteBorder(0,0,2,0, maroon));
 			fieldY +=50;
 			add(fields[a]);
 		}
 
+		
 
 		//iteration for the buttons
 		int btnX = 60;
@@ -122,14 +131,14 @@ public class Frame extends JFrame implements ActionListener{
 		for(int b=0; b<=btn.length-1; b++){
 			btn[b] = new JButton();
 			btn[b].setText(txtbtn[b]);
-			btn[b].setBounds(btnX,430,120,30);
+			btn[b].setBounds(btnX,480,120,30);
 			btn[b].setFont(arial15b);
 			btn[b].setFocusable(false);
 			
 			btn[b].addActionListener(this);
 			add(btn[b]);
 			if(b >= 3){
-				btn[b].setBounds(btnX1,480,120,30);
+				btn[b].setBounds(btnX1,530,120,30);
 				btnX1+=121;
 				add(btn[b]);
 			}
@@ -139,6 +148,25 @@ public class Frame extends JFrame implements ActionListener{
 
 		btn[4].setEnabled(false);
 		btn[5].setEnabled(false);
+
+		//setting the color of the buttons
+
+		for(int aa=0; aa<=5; aa++){
+			btn[aa].setBackground(darkBlue);
+			btn[aa].setForeground(gold);
+			btn[aa].setBorder(BorderFactory.createLineBorder(darkOrange,1));
+
+		}
+
+		btn[3].setBackground(maroon);
+		btn[3].setForeground(gold);
+
+
+		btn[4].setBackground(new Color(0x028A0F));
+		btn[4].setForeground(gold);
+
+		btn[5].setBackground(darkOrange);
+		btn[5].setForeground(darkBlue);
 
 		//setting the properties for the table
 		table.setDefaultEditor(Object.class, null);
@@ -157,7 +185,7 @@ public class Frame extends JFrame implements ActionListener{
 			tblmodel.getColumn(z).setPreferredWidth(50);
 		}
 		tblmodel.getColumn(0).setPreferredWidth(50);
-		tblmodel.getColumn(1).setPreferredWidth(130);
+		tblmodel.getColumn(2).setPreferredWidth(130);
 		 
 
 		for(int d=0; d<=header.length-1; d++){
@@ -174,7 +202,7 @@ public class Frame extends JFrame implements ActionListener{
 
 		//setting up some properties for the hidden butons
 		editSave.addActionListener(this);
-		editSave.setBounds(181,480,120,30);
+		editSave.setBounds(181,530,120,30);
 		editSave.setText("Save");
 		editSave.setVisible(false);
 		editSave.setFont(arial15b);
@@ -206,8 +234,17 @@ public class Frame extends JFrame implements ActionListener{
 
 		//this part is for the txtSeach
 		txtSearch = new JTextField();
-		txtSearch.setBounds(450,50,790,35);
+		txtSearch.setBounds(500,50,700,35);
+		txtSearch.setOpaque(false);
+		txtSearch.setBorder(BorderFactory.createMatteBorder(0,0,2,0, darkBlue));
+		txtSearch.setForeground(darkBlue);
 
+		//this part is for the label of the search item
+		lblSearch = new JLabel();
+		lblSearch.setBounds(450,20,150,30);
+		lblSearch.setText("Search for item/s:");
+		lblSearch.setFont(arial15b);
+		lblSearch.setForeground(darkBlue);
 
 
 		//this part is for the row sorter of the table
@@ -247,6 +284,7 @@ public class Frame extends JFrame implements ActionListener{
 		add(close);
 		add(tblPanel);
 		add(txtSearch);
+		add(lblSearch);
 
 
 
@@ -259,6 +297,7 @@ public class Frame extends JFrame implements ActionListener{
 
 	//declaring two int with empty value at this moment
 	int fld5Num, fld4Num;
+	Color maroon = new Color(0x800000);
 	
 
 
@@ -285,24 +324,24 @@ public class Frame extends JFrame implements ActionListener{
 				try{
 
 					String stock = JOptionPane.showInputDialog("Enter Stocks:");
-					String stockval = table.getValueAt(row,4).toString();
+					String stockval = table.getValueAt(row,5).toString();
 					int intStock = Integer.parseInt(stockval);
 					int totalStock = Integer.parseInt(stock) + intStock;
 
 					JOptionPane.showMessageDialog(this, "Successfully Added Stocks!");
-					defTableModel.setValueAt(String.valueOf(totalStock), row,4);
-					String val = table.getValueAt(row,5).toString();
+					defTableModel.setValueAt(String.valueOf(totalStock), row,5);
+					String val = table.getValueAt(row,6).toString();
 
 					if(totalStock<Integer.parseInt(val)){
-						defTableModel.setValueAt("Low Stock", row,6);
+						defTableModel.setValueAt("Low Stock", row,7);
 					}
 
 					else if(totalStock==Integer.parseInt(val)){
-						defTableModel.setValueAt("Low Stock", row,6);
+						defTableModel.setValueAt("Low Stock", row,7);
 					}
 
 					else if(totalStock>Integer.parseInt(val)){
-						defTableModel.setValueAt("High Stock", row,6);
+						defTableModel.setValueAt("High Stock", row,7);
 					}
 
 					for(int a=0; a<=fields.length-1; a++){
@@ -339,9 +378,11 @@ public class Frame extends JFrame implements ActionListener{
 			for(int a=1; a<=fields.length-1; a++){
 				fields[a].setEditable(true);
 				fields[a].setText("");
-				
+				fields[a].setBorder(BorderFactory.createMatteBorder(0,0,2,0, darkBlue));
+				fields[a].setForeground(darkBlue);
 			}
-			
+
+			fields[0].setForeground(maroon);
 
 			for(int b=0; b<=3; b++){
 				btn[b].setEnabled(false);
@@ -365,11 +406,20 @@ public class Frame extends JFrame implements ActionListener{
 
 				for(int a=0; a<=fields.length-1;a++){
 					fields[a].setEditable(true);
+					fields[a].setBorder(BorderFactory.createMatteBorder(0,0,2,0, darkBlue));
+					fields[a].setForeground(darkBlue);
 				}
 
-				fields[4].setEditable(false);
-				editSave.setVisible(true);
+				fields[0].setEditable(false);
+				fields[0].setForeground(maroon);
+				fields[0].setBorder(BorderFactory.createMatteBorder(0,0,2,0, maroon));
+
+				fields[5].setEditable(false);
+				fields[5].setForeground(maroon);
+				fields[5].setBorder(BorderFactory.createMatteBorder(0,0,2,0, maroon));
+				
 				btn[4].setVisible(false);
+				editSave.setVisible(true);
 
 				for(int r=0; r<=btn.length-1; r++){
 					btn[r].setEnabled(false);
@@ -387,14 +437,14 @@ public class Frame extends JFrame implements ActionListener{
 
 			try{
 
-				 if(fields[0].getText().isBlank() || fields[1].getText().isBlank() || fields[2].getText().isBlank() || fields[3].getText().isBlank() || fields[4].getText().isBlank() || fields[5].getText().isBlank()){
+				 if(fields[0].getText().isBlank() || fields[1].getText().isBlank() || fields[2].getText().isBlank() || fields[3].getText().isBlank() || fields[4].getText().isBlank() || fields[5].getText().isBlank() || fields[6].getText().isBlank()){
 		    		JOptionPane.showMessageDialog(this,"Please fill up all the inputs correctly.");		    	
 		    		}
 
 		    	else{
 				int row = table.getSelectedRow();
-				int fld4 = Integer.parseInt(fields[4].getText());
-				int fld5 = Integer.parseInt(fields[5].getText());
+				int fld4 = Integer.parseInt(fields[5].getText());
+				int fld5 = Integer.parseInt(fields[6].getText());
 
 				
 
@@ -403,20 +453,20 @@ public class Frame extends JFrame implements ActionListener{
 					defTableModel.setValueAt(fields[b].getText(), row, b);
 				}
 
-				defTableModel.setValueAt(String.valueOf(fld4), row, 4);
-				defTableModel.setValueAt(String.valueOf(fld5), row, 5);
+				defTableModel.setValueAt(String.valueOf(fld4), row, 5);
+				defTableModel.setValueAt(String.valueOf(fld5), row, 6);
 
 
 					if(fld4<fld5){
-						defTableModel.setValueAt("Low Stock", row,6);
+						defTableModel.setValueAt("Low Stock", row,7);
 					}
 
 					else if(fld4==fld5){
-						defTableModel.setValueAt("Low Stock", row,6);
+						defTableModel.setValueAt("Low Stock", row,7);
 					}
 
 					else if(fld4>fld5){
-						defTableModel.setValueAt("High Stock", row,6);
+						defTableModel.setValueAt("High Stock", row,7);
 					}
 
 					JOptionPane.showMessageDialog(this,"Successfully Edited Row!");
@@ -433,6 +483,8 @@ public class Frame extends JFrame implements ActionListener{
 					for(int i=0; i<=fields.length-1; i++){
 					fields[i].setText("");
 					fields[i].setEditable(false);
+					fields[i].setBorder(BorderFactory.createMatteBorder(0,0,2,0, maroon));
+					fields[i].setForeground(maroon);
 					}
 				}
 
@@ -477,16 +529,16 @@ public class Frame extends JFrame implements ActionListener{
 		//this part is for the Save button
 		else if(e.getSource() == btn[4]){
 
-			 if(fields[0].getText().equals("") || fields[1].getText().equals("") || fields[2].getText().equals("") || fields[3].getText().equals("") || fields[4].getText().equals("") || fields[5].getText().equals("")){
+			 if(fields[0].getText().equals("") || fields[1].getText().equals("") || fields[2].getText().equals("") || fields[3].getText().equals("") || fields[4].getText().equals("") || fields[5].getText().equals("") || fields[6].getText().equals("")){
 		    	JOptionPane.showMessageDialog(this,"Please fill up all the inputs correctly.");		    	
 		    }
 
 
-			 else if(fields[0].getText().isEmpty() || fields[1].getText().isEmpty() || fields[2].getText().isEmpty() || fields[3].getText().isEmpty() || fields[4].getText().isEmpty() || fields[5].getText().isEmpty()){
+			 else if(fields[0].getText().isEmpty() || fields[1].getText().isEmpty() || fields[2].getText().isEmpty() || fields[3].getText().isEmpty() || fields[4].getText().isEmpty() || fields[5].getText().isEmpty()|| fields[6].getText().isEmpty()){
 		    	JOptionPane.showMessageDialog(this,"Please fill up all the inputs correctly.");		    	
 		    }
 
-		     else if(fields[0].getText().isBlank() || fields[1].getText().isBlank() || fields[2].getText().isBlank() || fields[3].getText().isBlank() || fields[4].getText().isBlank() || fields[5].getText().isBlank()){
+		     else if(fields[0].getText().isBlank() || fields[1].getText().isBlank() || fields[2].getText().isBlank() || fields[3].getText().isBlank() || fields[4].getText().isBlank() || fields[5].getText().isBlank() || fields[6].getText().isBlank()){
 		    	JOptionPane.showMessageDialog(this,"Please fill up all the inputs correctly.");		    	
 		    }
 
@@ -494,10 +546,10 @@ public class Frame extends JFrame implements ActionListener{
 
 
 				try{
-					int p1 = Integer.parseInt(fields[4].getText());
-					int p2 = Integer.parseInt(fields[5].getText());
+					int p1 = Integer.parseInt(fields[5].getText());
+					int p2 = Integer.parseInt(fields[6].getText());
 
-					for(int f=0; f<=3; f++){
+					for(int f=0; f<=4; f++){
 					vector.add(fields[f].getText());
 					}
 
@@ -533,6 +585,8 @@ public class Frame extends JFrame implements ActionListener{
 					for(int i=0; i<=fields.length-1; i++){
 						fields[i].setText("");
 						fields[i].setEditable(false);
+						fields[i].setBorder(BorderFactory.createMatteBorder(0,0,2,0, maroon));
+						fields[i].setForeground(maroon);
 					}
 
 					btn[4].setEnabled(false);
@@ -570,6 +624,8 @@ public class Frame extends JFrame implements ActionListener{
 				for(int i=0; i<=fields.length-1; i++){
 					fields[i].setText("");
 					fields[i].setEditable(false);
+					fields[i].setBorder(BorderFactory.createMatteBorder(0,0,2,0, maroon));
+					fields[i].setForeground(maroon);
 				}
 				btn[4].setVisible(true);
 				btn[4].setEnabled(false);

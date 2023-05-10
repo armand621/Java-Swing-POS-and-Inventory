@@ -86,6 +86,7 @@ public class Dashboard extends JFrame implements ActionListener{
 		else if(e.getSource() == btn[1]){
 			Frame fr = new Frame();
 			fr.frameInventory();
+			dispose();
 		}
 
 	}
