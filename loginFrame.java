@@ -241,7 +241,10 @@ public class loginFrame extends JFrame implements ActionListener{
 		
 
 		else if(e.getSource() == closeBtn){
-			System.exit(0);
+			int closeOpt = JOptionPane.showConfirmDialog(this, "Are you sure to exit?", "Confirmation", JOptionPane.YES_NO_OPTION);
+			if(closeOpt==0){
+				dispose();
+			}
 		}
 
 	}

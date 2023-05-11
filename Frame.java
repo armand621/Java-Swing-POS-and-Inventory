@@ -55,6 +55,7 @@ public class Frame extends JFrame implements ActionListener{
 
 	JButton pass = new JButton();
 	JButton editSave = new JButton();
+	JButton cancel2 = new JButton();
 
 	JTextField txtSearch;
 	JLabel lblSearch;
@@ -62,6 +63,8 @@ public class Frame extends JFrame implements ActionListener{
 	Color gold = new Color(0xFCCB06);
 	Color darkBlue = new Color(0x222E50);
 	Color darkOrange = new Color(0xFF8C00);
+
+	JButton back2Dash = new JButton();
 
 
 
@@ -107,7 +110,12 @@ public class Frame extends JFrame implements ActionListener{
 
 		}
 
-		labels[0].setBounds(30,10,130,30);
+		labels[0].setBounds(10,20,415,40);
+		labels[0].setHorizontalAlignment(JLabel.CENTER);
+		labels[0].setForeground(gold);
+		labels[0].setBackground(darkBlue);
+		labels[0].setOpaque(true);
+		labels[0].setFont(arial18b);
 
 
 		//iteration for the text fields
@@ -165,8 +173,31 @@ public class Frame extends JFrame implements ActionListener{
 		btn[4].setBackground(new Color(0x028A0F));
 		btn[4].setForeground(gold);
 
+		editSave.setBackground(new Color(0x028A0F));
+		editSave.setForeground(gold);
+
 		btn[5].setBackground(darkOrange);
 		btn[5].setForeground(darkBlue);
+
+		//this button is for the 2nd cancel button
+		cancel2.setBackground(darkOrange);
+		cancel2.setForeground(darkBlue);
+		cancel2.setBounds(302,530,120,30);
+		cancel2.setText("Cancel");
+		cancel2.setFont(arial15b);
+		cancel2.addActionListener(this);
+		cancel2.setVisible(false);
+		add(cancel2);
+
+		//this part is for the back to dashboard button
+		back2Dash.setBounds(15,570,180,20);
+		back2Dash.setText("<html><u>Back to Dashboard</u></html>");
+		back2Dash.setOpaque(true);
+		back2Dash.setForeground(darkBlue);
+		back2Dash.setBackground(gold);
+		back2Dash.setBorder(null);
+		back2Dash.addActionListener(this);
+		add(back2Dash);
 
 		//setting the properties for the table
 		table.setDefaultEditor(Object.class, null);
@@ -287,8 +318,6 @@ public class Frame extends JFrame implements ActionListener{
 		add(lblSearch);
 
 
-
-
 		//this property must be always at the end to prevent bugs 
 		setVisible(true);
 
@@ -307,7 +336,11 @@ public class Frame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 
 		if(e.getSource() == close){
-			System.exit(0);
+
+			int closeOpt = JOptionPane.showConfirmDialog(this, "Are you sure to exit?", "Confirmation", JOptionPane.YES_NO_OPTION);
+			if(closeOpt==0){
+				dispose();
+			}
 		}
 
 
@@ -424,7 +457,11 @@ public class Frame extends JFrame implements ActionListener{
 				for(int r=0; r<=btn.length-1; r++){
 					btn[r].setEnabled(false);
 				}
+				btn[5].setVisible(false);
 				btn[5].setEnabled(true);
+
+				cancel2.setVisible(true);
+
 
 			}
 
@@ -636,6 +673,49 @@ public class Frame extends JFrame implements ActionListener{
 				 
 				}
 						
+		}
+
+		//this part is for the 2nd cancel button
+		else if(e.getSource() == cancel2){
+			int cancelRes = JOptionPane.showConfirmDialog(this, "Do you want to cancel the operation?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+			if(cancelRes == 0){
+				table.getSelectionModel().clearSelection();
+				for(int h = 0; h<=3; h++){
+					btn[h].setEnabled(true);
+				}
+
+				for(int i=0; i<=fields.length-1; i++){
+					fields[i].setText("");
+					fields[i].setEditable(false);
+					fields[i].setBorder(BorderFactory.createMatteBorder(0,0,2,0, maroon));
+					fields[i].setForeground(maroon);
+				}
+				btn[4].setVisible(true);
+				btn[4].setEnabled(false);
+				btn[5].setVisible(true);
+				btn[5].setEnabled(false);
+				editSave.setVisible(false);
+				cancel2.setVisible(false);
+				
+
+				 
+				}
+						
+		}
+
+
+		else if(e.getSource() == back2Dash){
+
+
+
+			Dashboard dsh = new Dashboard();
+			dsh.userDashboard();
+			dispose();
+
+
+
+
 		}
 
 

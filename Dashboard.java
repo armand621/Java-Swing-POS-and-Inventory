@@ -79,7 +79,10 @@ public class Dashboard extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 
 		if(e.getSource() == closeBtn){
-			System.exit(0);
+			int closeOpt = JOptionPane.showConfirmDialog(this, "Are you sure to exit?", "Confirmation", JOptionPane.YES_NO_OPTION);
+			if(closeOpt==0){
+				dispose();
+			}
 		}
 
 
