@@ -1,4 +1,4 @@
-//Inventory System
+//Inventory System & POS
 //Programmer: Armand Robin I. Tangonan
 //github.com/armand621
 
@@ -89,6 +89,13 @@ public class Dashboard extends JFrame implements ActionListener{
 		else if(e.getSource() == btn[1]){
 			Frame fr = new Frame();
 			fr.frameInventory();
+			dispose();
+		}
+
+
+		else if(e.getSource() == btn[0]){
+			POS ps = new POS();
+			ps.pos();
 			dispose();
 		}
 
