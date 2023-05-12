@@ -217,6 +217,7 @@ public class Frame extends JFrame implements ActionListener{
 		back2Dash.setForeground(darkBlue);
 		back2Dash.setBackground(gold);
 		back2Dash.setBorder(null);
+		back2Dash.setFocusable(false);
 		back2Dash.addActionListener(this);
 		add(back2Dash);
 
