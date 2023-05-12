@@ -1,4 +1,4 @@
-//Inventory System
+//Inventory System & POS
 //Programmer: Armand Robin I. Tangonan
 //github.com/armand621
 
@@ -27,7 +27,27 @@ public class Frame extends JFrame implements ActionListener{
 
 	String[][] permData = {
 
-		// {"00000", "Sample Item", "P20", "12 ounce", "100 pcs", "10", "High Stocks"}
+		{"00001", "Argentina Corn Beef", "In-can Corn Beef", "P50", "175 grams", "100", "10", "High Stocks"},
+		{"00002", "Rebisco Crackers", "Biscuit", "P7", "30 grams", "50", "10", "High Stocks"},
+		{"00003", "Nature Spring Mineral Water", "Mineral Water", "P10", "500 Ml", "60", "10", "High Stocks"},
+		{"00004", "LM Pancit Canton", "Noodles", "P18", "100 grams", "90", "10", "High Stocks"},
+		{"00005", "Fiesta Cooking Oil", "Palm-oil for cooking", "P70", "300 Ml", "100", "10", "High Stocks"},
+		{"00006", "555 Sardines", "In-can Sardines", "P23", "130 grams", "70", "10", "High Stocks"},
+		{"00007", "Pocari Sweat", "Electrolyte Water", "P60", "500 Ml", "50", "10", "High Stocks"},
+		{"00008", "Pinoy Bread", "Locally made bread", "P50", "800 grams", "90", "10", "High Stocks"},
+		{"00009", "Coca Cola", "Carbonated Drink", "P20", "200 grams", "45", "10", "High Stocks"},
+		{"00010", "Nissin Wafer", "Chocolate Wafer", "P8", "100 grams", "70", "10", "High Stocks"},
+		{"00011", "Nescafe Creamy White", "3 in 1 Coffee", "P10", "95 grams", "100", "10", "High Stocks"},
+		{"00012", "LM Beef", "Noodles", "P12", "70 grams", "80", "10", "High Stocks"},
+		{"00013", "Dowee Donut", "Donut bread", "P15", "30 grams", "50", "10", "High Stocks"},
+		{"00014", "Milo Champion", "Chocolate Drink", "P10", "20 grams", "60", "10", "High Stocks"},
+		{"00015", "Zesto", "Fruit Flavored Drink", "P12", "200 grams", "100", "10", "High Stocks"},
+		{"00016", "Cheese Ring", "Cheese crackers", "P25", "100 grams", "80", "10", "High Stocks"},
+		{"00017", "Clover Chips", "Cheese crackers", "P10", "80 grams", "70", "10", "High Stocks"},
+		{"00018", "Selecta Cornetto", "Ice cream", "P25", "70 grams", "60", "10", "High Stocks"},
+		{"00019", "Blue Drinking Water", "Flavored Water", "P30", "500 Ml", "40", "10", "High Stocks"},
+		{"00020", "Sky Flakes", "Crackers", "P8", "40 grams", "100", "10", "High Stocks"},
+
 
 	};
 
@@ -36,7 +56,7 @@ public class Frame extends JFrame implements ActionListener{
 	Font arial18b = new Font("Arial", Font.BOLD,18);
 	int fieldWidth = 200;
 	int fieldHeight = 40;
-	int itcd = 1;
+	int itcd = 21;
 
 
 	DecimalFormat decfor = new DecimalFormat("00000");
@@ -59,6 +79,7 @@ public class Frame extends JFrame implements ActionListener{
 
 	JTextField txtSearch;
 	JLabel lblSearch;
+	JButton srcClear;
 
 	Color gold = new Color(0xFCCB06);
 	Color darkBlue = new Color(0x222E50);
@@ -216,7 +237,10 @@ public class Frame extends JFrame implements ActionListener{
 			tblmodel.getColumn(z).setPreferredWidth(50);
 		}
 		tblmodel.getColumn(0).setPreferredWidth(50);
-		tblmodel.getColumn(2).setPreferredWidth(130);
+		tblmodel.getColumn(1).setPreferredWidth(130);
+		tblmodel.getColumn(2).setPreferredWidth(80);
+		tblmodel.getColumn(3).setPreferredWidth(40);
+
 		 
 
 		for(int d=0; d<=header.length-1; d++){
@@ -230,6 +254,7 @@ public class Frame extends JFrame implements ActionListener{
 		table.setFocusable(false);
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setRowHeight(25);
 
 		//setting up some properties for the hidden butons
 		editSave.addActionListener(this);
@@ -265,17 +290,31 @@ public class Frame extends JFrame implements ActionListener{
 
 		//this part is for the txtSeach
 		txtSearch = new JTextField();
-		txtSearch.setBounds(500,50,700,35);
+		txtSearch.setBounds(480,50,600,35);
 		txtSearch.setOpaque(false);
 		txtSearch.setBorder(BorderFactory.createMatteBorder(0,0,2,0, darkBlue));
 		txtSearch.setForeground(darkBlue);
+		txtSearch.setFont(arial15b);
 
 		//this part is for the label of the search item
 		lblSearch = new JLabel();
-		lblSearch.setBounds(450,20,150,30);
+		lblSearch.setBounds(450,20,300,30);
 		lblSearch.setText("Search for item/s:");
 		lblSearch.setFont(arial15b);
 		lblSearch.setForeground(darkBlue);
+
+		//this part is for the search clear button
+		srcClear = new JButton();
+		srcClear.setText("Clear");
+		srcClear.setBounds(1100,57, 100,30);
+		srcClear.addActionListener(this);
+		srcClear.setOpaque(true);
+		srcClear.setBackground(darkBlue);
+		srcClear.setForeground(gold);
+		srcClear.setFocusable(false);
+		srcClear.setFont(arial15b);
+
+		add(srcClear);
 
 
 		//this part is for the row sorter of the table
@@ -716,6 +755,11 @@ public class Frame extends JFrame implements ActionListener{
 
 
 
+		}
+
+		else if(e.getSource() == srcClear){
+
+			txtSearch.setText("");
 		}
 
 

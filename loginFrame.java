@@ -1,4 +1,4 @@
-//Inventory System
+//Inventory System & POS
 //Programmer: Armand Robin I. Tangonan
 //github.com/armand621
 
