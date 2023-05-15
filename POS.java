@@ -15,6 +15,9 @@ import javax.swing.table.*;
 import javax.swing.event.*;
 
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
 public class POS extends JFrame implements ActionListener{
 
 	JButton closeBtn;
@@ -26,6 +29,13 @@ public class POS extends JFrame implements ActionListener{
 	JButton back2Dash;
 
 	Frame frObj = new Frame();
+
+
+	JLabel date, time;
+
+
+
+
 
 	JScrollPane scrollpane = new JScrollPane(frObj.table);
 
@@ -39,6 +49,21 @@ public class POS extends JFrame implements ActionListener{
 		setUndecorated(true);
 		getContentPane().setBackground(darkBlue);
 
+
+		date = new JLabel();
+		time = new JLabel();
+
+		date.setBounds(10,10,200,40);
+		time.setBounds(50,70,200,40);
+
+		date.setForeground(Color.BLACK);
+		time.setForeground(Color.BLACK);
+
+		
+
+
+		add(date);
+		add(time);
 
 
 		 closeBtn = new JButton();
@@ -76,6 +101,10 @@ public class POS extends JFrame implements ActionListener{
 		add(expan);
 		setVisible(true);
 	}
+
+
+
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e){
