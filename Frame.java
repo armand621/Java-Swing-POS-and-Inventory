@@ -92,6 +92,8 @@ public class Frame extends JFrame implements ActionListener{
 //This is the declaration for the main frame
 	void frameInventory(){
 
+		
+
 		//the main frame properties
 		setSize(1250,600);
 		setLocationRelativeTo(null);
@@ -110,6 +112,10 @@ public class Frame extends JFrame implements ActionListener{
 		close.setForeground(Color.WHITE);
 		close.setFocusable(false);
 		close.addActionListener(this);
+
+		//experimental button
+		tryclick.addActionListener(this);
+		add(tryclick);
 
 
 		//declaring the properties for the table panel
@@ -367,6 +373,7 @@ public class Frame extends JFrame implements ActionListener{
 	//declaring two int with empty value at this moment
 	int fld5Num, fld4Num;
 	Color maroon = new Color(0x800000);
+	int mmm;
 	
 
 
@@ -762,6 +769,8 @@ public class Frame extends JFrame implements ActionListener{
 
 			txtSearch.setText("");
 		}
+
+
 
 
 	}
