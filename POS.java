@@ -62,10 +62,36 @@ public class POS extends JFrame implements ActionListener{
 	JLabel [] mainLbl = new JLabel[strMainLbl.length];
 
 
+	//this part is for the textfield of the quantity
+	JTextField quantity;
+
+	//this part is for the button of the search item
+	JButton srcBtn;
+
+	//this part is for the integer value of the invoice number
+	int invoiceNum = 1000000;
 
 
 
-	JScrollPane scrollpane = new JScrollPane(frObj.table);
+
+
+	//this part is for the table
+	String [][] posData = {};
+	String[] posHeader = {"Item Code", "Item Name", "Size", "Price", "Quantity", "Total"};
+
+	DefaultTableModel posDefTableModel = new DefaultTableModel(posData, posHeader);
+	JTable posTable = new JTable(posDefTableModel);
+	JScrollPane posScrollpane = new JScrollPane(posTable);
+
+	Vector<String> posVector = new Vector<String>();
+
+	DefaultTableCellRenderer rdr = new DefaultTableCellRenderer();
+
+
+
+
+	//this part will be commented out since it was just for sample purpose only
+	// JScrollPane scrollpane = new JScrollPane(frObj.table);
 
 	void pos(){
 
@@ -105,18 +131,20 @@ public class POS extends JFrame implements ActionListener{
 		back2Dash = new JButton();
 		back2Dash.setBounds(15,570,180,20);
 		back2Dash.setText("<html><u>Back to Dashboard</u></html>");
-		back2Dash.setOpaque(false);
-		back2Dash.setForeground(gold);
+		back2Dash.setOpaque(true);
+		back2Dash.setBackground(new Color(0xf3f0f0));
+		back2Dash.setForeground(darkBlue);
 		back2Dash.setBorder(null);
 		back2Dash.addActionListener(this);
 		back2Dash.setFocusable(false);
 		add(back2Dash);
 
 
+		// this part will be commmented out since it was just for sample purpose only
 		JPanel expan = new JPanel();
-		expan.setBounds(0,150,790,420);
+		expan.setBounds(20,230,790,320);
 		expan.setLayout(new BorderLayout());
-		expan.add(scrollpane);
+		expan.add(posScrollpane);
 
 		//this part is for the initialization of the date and time
 		int lblDateY = 4;
@@ -189,15 +217,45 @@ public class POS extends JFrame implements ActionListener{
    		for(int c = 0; c<=strMainLbl.length-1; c++){
    			mainLbl[c] = new JLabel();
    			mainLbl[c].setText(strMainLbl[c]);
-   			mainLbl[c].setBounds(mainLblX, 80, 200, 40);
+   			mainLbl[c].setBounds(mainLblX, 110, 200, 40);
    			mainLbl[c].setFont(arial18b);
    			add(mainLbl[c]);
-   			mainLblX+=250;
+   			mainLblX+=290;
    		}
 
+
+   		//this part is for the textfield of the quantity
+   		quantity = new JTextField();
+   		quantity.setBounds(40,150,200,35);
+   		quantity.setOpaque(false);
+   		quantity.setBorder(BorderFactory.createMatteBorder(0,0,2,0,darkBlue));
+   		add(quantity);
+
+   		//this part is for the button for the search item
+   		srcBtn = new JButton();
+   		srcBtn.setText("Search");
+   		srcBtn.setFocusable(false);
+   		srcBtn.setBounds(310,150,200,35);
+   		srcBtn.setOpaque(true);
+   		srcBtn.setBackground(darkBlue);
+   		srcBtn.setForeground(gold);
+   		srcBtn.setFont(arial18b);
+   		srcBtn.addActionListener(this);
+   		add(srcBtn);
+
+   		//this part is for the invoice number
+
+   		mainLbl[3].setBounds(620,150,200,35);
+   		mainLbl[3].setText(String.valueOf(invoiceNum));
+   		mainLbl[3].setFont(arial25b);
+   		mainLbl[3].setForeground(darkBlue);
+
+
+
+   		//this part is for adding components to the frame
    		add(lblNumTotal);
    		add(lblTotal);
-		add(expan);
+		add(expan); //this part has been commented out because it was just for sample purpose only
 		add(lblBg);
 		setVisible(true);
 	}
@@ -233,14 +291,46 @@ public class POS extends JFrame implements ActionListener{
 			dsh.userDashboard();
 			dispose();
 
-			ShowInventory sh = new ShowInventory();
-			sh.inventory();
+			
 
 
 
 
 		}
 
+
+		else if (e.getSource() == srcBtn){
+
+			 if(quantity.getText().equals("")){
+		    	JOptionPane.showMessageDialog(this,"Please enter number into quantity.");		    	
+		    }
+
+
+			 else if(quantity.getText().isEmpty()){
+		    	JOptionPane.showMessageDialog(this,"Please enter number into quantity.");		    	
+		    }
+
+		     else if(quantity.getText().isBlank()){
+		    	JOptionPane.showMessageDialog(this,"Please enter number into quantity.");		    	
+		    }
+
+		    else{
+			//this is for the try and catch
+				try{
+					int parsedQuantityNum = Integer.parseInt(quantity.getText());
+					ShowInventory sh = new ShowInventory();
+					sh.inventory();
+
+				}
+
+				catch(Exception armand){
+					JOptionPane.showMessageDialog(null, "Please enter number");
+
+				}
+
+			}
+
+		}
 
 	}
 
