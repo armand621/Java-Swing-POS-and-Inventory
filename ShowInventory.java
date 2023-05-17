@@ -32,7 +32,48 @@ public class ShowInventory extends JFrame implements ActionListener{
 	//this part is for making an object of the class POS, which contains the pos system
 	POS objPos = new POS();
 
-	JScrollPane scrollpane = new JScrollPane(objFr.table);
+
+	//this part is for the header of the table
+	String[] header = {"Item Code", "Item Name", "Item Description", "Price", "Size", "Stocks", "Re-Order Point", "Remarks"};
+
+
+	//this part is for the data of the table
+	String[][] permData = {
+
+		{"00001", "Argentina Corn Beef", "In-can Corn Beef", "50", "175 grams", "100", "10", "High Stocks"},
+		{"00002", "Rebisco Crackers", "Biscuit", "7", "30 grams", "50", "10", "High Stocks"},
+		{"00003", "Nature Spring Mineral Water", "Mineral Water", "P10", "500 Ml", "60", "10", "High Stocks"},
+		{"00004", "LM Pancit Canton", "Noodles", "18", "100 grams", "90", "10", "High Stocks"},
+		{"00005", "Fiesta Cooking Oil", "Palm-oil for cooking", "70", "300 Ml", "100", "10", "High Stocks"},
+		{"00006", "555 Sardines", "In-can Sardines", "23", "130 grams", "70", "10", "High Stocks"},
+		{"00007", "Pocari Sweat", "Electrolyte Water", "60", "500 Ml", "50", "10", "High Stocks"},
+		{"00008", "Pinoy Bread", "Locally made bread", "50", "800 grams", "90", "10", "High Stocks"},
+		{"00009", "Coca Cola", "Carbonated Drink", "20", "200 grams", "45", "10", "High Stocks"},
+		{"00010", "Nissin Wafer", "Chocolate Wafer", "8", "100 grams", "70", "10", "High Stocks"},
+		{"00011", "Nescafe Creamy White", "3 in 1 Coffee", "10", "95 grams", "100", "10", "High Stocks"},
+		{"00012", "LM Beef", "Noodles", "12", "70 grams", "80", "10", "High Stocks"},
+		{"00013", "Dowee Donut", "Donut bread", "15", "30 grams", "50", "10", "High Stocks"},
+		{"00014", "Milo Champion", "Chocolate Drink", "10", "20 grams", "60", "10", "High Stocks"},
+		{"00015", "Zesto", "Fruit Flavored Drink", "12", "200 grams", "100", "10", "High Stocks"},
+		{"00016", "Cheese Ring", "Cheese crackers", "25", "100 grams", "80", "10", "High Stocks"},
+		{"00017", "Clover Chips", "Cheese crackers", "10", "80 grams", "70", "10", "High Stocks"},
+		{"00018", "Selecta Cornetto", "Ice cream", "25", "70 grams", "60", "10", "High Stocks"},
+		{"00019", "Blue Drinking Water", "Flavored Water", "30", "500 Ml", "40", "10", "High Stocks"},
+		{"00020", "Sky Flakes", "Crackers", "8", "40 grams", "100", "10", "High Stocks"},
+
+
+	};
+
+	//this part is for the defining of the table
+	DefaultTableModel defTableModel = new DefaultTableModel(permData,header);
+	JTable table = new JTable(defTableModel);
+	JScrollPane scrollpane = new JScrollPane(table);
+
+	Vector<String> vector = new Vector<String>();
+
+	DefaultTableCellRenderer rdr = new DefaultTableCellRenderer();
+
+
 
 	//this part is for the search component of the table
 	JTextField txtSearch;
@@ -44,7 +85,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 		setSize(800,490);
 		setLocationRelativeTo(null);
 		setLayout(null);
-		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setUndecorated(true);
 		getContentPane().setBackground(new Color(0xf3f0f0));
@@ -66,15 +107,15 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 
 		//setting the properties for the table
-		objFr.table.setDefaultEditor(Object.class, null);
-		objFr.table.getTableHeader().setEnabled(false);
-		objFr.table.getTableHeader().setPreferredSize(new Dimension(50, 30));
+		table.setDefaultEditor(Object.class, null);
+		table.getTableHeader().setEnabled(false);
+		table.getTableHeader().setPreferredSize(new Dimension(50, 30));
 
-		objFr.rdr.setHorizontalAlignment(JLabel.CENTER);
+		rdr.setHorizontalAlignment(JLabel.CENTER);
 
 
 		//declaring the table model property
-		TableColumnModel tblmodel = objFr.table.getColumnModel();
+		TableColumnModel tblmodel = table.getColumnModel();
 		
 
 		//setting up some properties for the table model
@@ -88,16 +129,16 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 		 
 
-		for(int d=0; d<=objFr.header.length-1; d++){
-			objFr.table.getColumnModel().getColumn(d).setCellRenderer(objFr.rdr);
+		for(int d=0; d<=header.length-1; d++){
+			table.getColumnModel().getColumn(d).setCellRenderer(rdr);
 		}
 		
 
 		//setting up the table
-		objFr.table.setFocusable(false);
-		objFr.table.setRowSelectionAllowed(true);
-		objFr.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		objFr.table.setRowHeight(25);
+		table.setFocusable(false);
+		table.setRowSelectionAllowed(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setRowHeight(25);
 
 		//this part is for the search
 		//this part is for the txtSeach
@@ -118,8 +159,8 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 		//this part is for the row sorter of the table
 
-		TableRowSorter<TableModel> sort = new TableRowSorter<>(objFr.table.getModel());
-		objFr.table.setRowSorter(sort);
+		TableRowSorter<TableModel> sort = new TableRowSorter<>(table.getModel());
+		table.setRowSorter(sort);
 		txtSearch.getDocument().addDocumentListener(new DocumentListener()
 		    {
 		            @Override
@@ -183,7 +224,21 @@ public class ShowInventory extends JFrame implements ActionListener{
 	}
 
 	int numQuanti;
-	String forTryClick;
+	// int mm = table.getSelectedRow();
+
+	void getTableValue(){
+		int mm = table.getSelectedRow();
+		if(table.getRowCount() == -1){
+			String itmcd = table.getValueAt(mm,0).toString();
+			String itmnm = table.getValueAt(mm,1).toString();
+			String itmst = table.getValueAt(mm,4).toString();
+		
+			objPos.posDefTableModel.setValueAt(itmcd,0,0);
+			objPos.posDefTableModel.setValueAt(itmcd,0,1);
+			objPos.posDefTableModel.setValueAt(itmcd,0,2);
+		}	
+	}
+	int mm;
 
 	@Override
 	public void actionPerformed(ActionEvent e){
@@ -191,6 +246,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 		if(e.getSource() == closeBtn){
 			int closeOpt = JOptionPane.showConfirmDialog(null, "Are you sure to exit?", "Confirmation", JOptionPane.YES_NO_OPTION);
 			if(closeOpt==0){
+				// setVisible(false);
 				dispose();
 			}
 		}
@@ -198,34 +254,30 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 		else if(e.getSource() == btnAdd){
 
-			int mm = objFr.table.getSelectedRow();
+			// int mm = table.getSelectedRow();
 
-			if(objFr.table.getSelectedRow() == -1){
+			if(table.getSelectedRow() == -1){
 				JOptionPane.showMessageDialog(null,"Please select item to add");
 			}
 
 			else{
-				int numRow = objFr.table.getSelectedRow();
-				String stockNum = objFr.table.getValueAt(numRow,5).toString();
-				int parsedStockNum = Integer.parseInt(stockNum);
-				int newStock = parsedStockNum - numQuanti;
+				// String stock = table.getValueAt(mm,5).toString();
+				// int intStock = Integer.parseInt(stock);
+				POS mp = new POS();
+				mm = table.getSelectedRow();
+				POS.itmcd = table.getValueAt(mm,0).toString();
+				POS.itmnm = table.getValueAt(mm,1).toString();
+				POS.itmst = table.getValueAt(mm,4).toString();
 
-				// objFr.permData[numRow][5] = String.valueOf(newStock);
-				objFr.frameInventory();
-				objFr.tryclick.doClick();
-				// objFr.defTableModel.setValueAt(String.valueOf(newStock), numRow,5);
-				setVisible(false);
+				POS.adder.doClick();
 
-				System.out.println("Quantity of items: " + numQuanti);
-				System.out.println("Row selected: " + numRow);
-				System.out.println("Number of new Stock: " + newStock);
-				System.out.println("Value of stock of selected row: " + parsedStockNum+"\n");
+				mp.posVector = new Vector<String>();
+				dispose();
 
-				System.out.println(forTryClick);
-				
-
-
-				// numQuanti = 0;
+				// int newStock = intStock - numQuanti;
+				// defTableModel.setValueAt(String.valueOf(newStock), mm,5);
+				// // setVisible(false);
+				// System.out.println(newStock);
 			}
 
 

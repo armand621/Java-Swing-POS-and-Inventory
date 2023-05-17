@@ -90,6 +90,13 @@ public class POS extends JFrame implements ActionListener{
 	DefaultTableCellRenderer rdr = new DefaultTableCellRenderer();
 
 
+	//this part is for the reserved variables
+	static String itmcd;
+	static String itmnm;
+	static String itmst;
+
+	//this part is for the experimental button
+	static JButton adder;
 
 
 	//this part will be commented out since it was just for sample purpose only
@@ -111,11 +118,11 @@ public class POS extends JFrame implements ActionListener{
 		lblBg.setIcon(frameBg);
 		lblBg.setBounds(0,0,1250,600);
 
-
-		
-
- 
-
+		adder = new JButton();
+		adder.setBounds(0,0,10,20);
+		adder.setVisible(false);
+		adder.addActionListener(this);
+		add(adder);
 
 		 closeBtn = new JButton();
 		 closeBtn.setBounds(1200,0,50,20);
@@ -274,6 +281,7 @@ public class POS extends JFrame implements ActionListener{
   	}
 
 
+
 	
 
 	@Override
@@ -326,6 +334,7 @@ public class POS extends JFrame implements ActionListener{
 					ShowInventory sh = new ShowInventory();
 					sh.inventory();
 					sh.numQuanti = parsedQuantityNum;
+					// sh.setVisible(true);
 
 				}
 
@@ -336,6 +345,20 @@ public class POS extends JFrame implements ActionListener{
 
 			}
 
+		}
+
+
+		else if(e.getSource() == adder){
+
+				
+			posVector = new Vector<String>();
+			posVector.add(itmcd);
+			posVector.add(itmnm);
+			posVector.add(itmst);
+			posDefTableModel.addRow(posVector);
+			// System.out.println(itmcd);
+			// System.out.println(itmnm);
+			// System.out.println(itmst);
 		}
 
 	}
