@@ -113,10 +113,6 @@ public class Frame extends JFrame implements ActionListener{
 		close.setFocusable(false);
 		close.addActionListener(this);
 
-		//experimental button
-		tryclick.addActionListener(this);
-		add(tryclick);
-
 
 		//declaring the properties for the table panel
 		tblPanel = new JPanel();
