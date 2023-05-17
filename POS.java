@@ -75,6 +75,8 @@ public class POS extends JFrame implements ActionListener{
 
 
 
+
+
 	//this part is for the table
 	String [][] posData = {};
 	String[] posHeader = {"Item Code", "Item Name", "Size", "Price", "Quantity", "Total"};
@@ -261,6 +263,9 @@ public class POS extends JFrame implements ActionListener{
 	}
 
 
+	
+
+
 	//this part is for the clock
 	 public void clockActive(){
     	// lblDate[1].setText(DateFormat.getTimeInstance().format(new Date()));
@@ -320,6 +325,7 @@ public class POS extends JFrame implements ActionListener{
 					int parsedQuantityNum = Integer.parseInt(quantity.getText());
 					ShowInventory sh = new ShowInventory();
 					sh.inventory();
+					sh.numQuanti = parsedQuantityNum;
 
 				}
 
