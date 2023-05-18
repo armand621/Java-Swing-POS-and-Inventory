@@ -2,9 +2,10 @@
 //Programmer: Armand Robin I. Tangonan
 //github.com/armand621
 
-
-import java.util.regex.*;
+import java.io.*;
 import java.util.*;
+import java.lang.*;
+import java.util.regex.*;
 import javax.swing.*;
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -25,9 +26,9 @@ public class POS extends JFrame implements ActionListener{
 
 	JButton closeBtn;
 
-	Color gold = new Color(0xFCCB06);
-	Color darkBlue = new Color(0x222E50);
-	Color darkOrange = new Color(0xFF8C00);
+	static Color gold = new Color(0xFCCB06);
+	static Color darkBlue = new Color(0x222E50);
+	static Color darkOrange = new Color(0xFF8C00);
 
 	Font arial12b = new Font("Arial", Font.BOLD,12);
 	Font arial15b = new Font("Arial", Font.BOLD,15);
@@ -99,13 +100,13 @@ public class POS extends JFrame implements ActionListener{
 	//this part is for the experimental button
 	static JButton adder;
 
-	// static JButton setter;
+	static JButton setter;
 
 
 	//this part will be commented out since it was just for sample purpose only
 	// JScrollPane scrollpane = new JScrollPane(frObj.table);
 
-	int b;
+	double b, posQuantity;;
 
 	void pos(){
 
@@ -131,11 +132,11 @@ public class POS extends JFrame implements ActionListener{
 
 
 
-		// setter = new JButton();
-		// setter.setBounds(20,0,10,20);
-		// setter.setVisible(false);
-		// setter.addActionListener(this);
-		// add(setter);
+		setter = new JButton();
+		setter.setBounds(20,0,10,20);
+		setter.setVisible(false);
+		setter.addActionListener(this);
+		add(setter);
 
 		 closeBtn = new JButton();
 		 closeBtn.setBounds(1200,0,50,20);
@@ -234,6 +235,10 @@ public class POS extends JFrame implements ActionListener{
    			transBtnY+=60;
    		}
 
+   		transBtn[1].setEnabled(false);
+   		transBtn[2].setEnabled(false);
+
+
 
    		//this part is for the initialization of mainlabel
    		int mainLblX = 40;
@@ -289,6 +294,7 @@ public class POS extends JFrame implements ActionListener{
 
 
 
+
    		//this part is for adding components to the frame
    		add(lblNumTotal);
    		add(lblTotal);
@@ -308,8 +314,6 @@ public class POS extends JFrame implements ActionListener{
     	lblDate[1].setText("Time: " + DateFormat.getTimeInstance().format(new Date()));
   	}
 
-
- 	int posQuantity;
 	
 
 	@Override
@@ -318,7 +322,7 @@ public class POS extends JFrame implements ActionListener{
 		if(e.getSource() == closeBtn){
 			int closeOpt = JOptionPane.showConfirmDialog(this, "Are you sure to exit?", "Confirmation", JOptionPane.YES_NO_OPTION);
 			if(closeOpt==0){
-				dispose();
+				System.exit(0);
 			}
 		}
 
@@ -358,7 +362,7 @@ public class POS extends JFrame implements ActionListener{
 		    else{
 			//this is for the try and catch
 				try{
-					int parsedQuantityNum = Integer.parseInt(quantity.getText());
+					double parsedQuantityNum = Double.parseDouble(quantity.getText());
 					ShowInventory sh = new ShowInventory();
 					sh.inventory();
 					// sh.expBtn.doClick();
@@ -369,6 +373,9 @@ public class POS extends JFrame implements ActionListener{
 					int aRowCount = posTable.getRowCount();
 					ShowInventory.posRowCount = aRowCount;
 					srcBtn.setEnabled(false);
+
+
+
 
 					// ShowInventory.code = Integer.parseInt(String.valueOf(posTable.getValueAt(0,0)));
 					// // setter.doClick();
@@ -399,9 +406,9 @@ public class POS extends JFrame implements ActionListener{
 			posVector.add(itmpc);
 			posVector.add(String.valueOf(posQuantity));
 
-			int numPrice = Integer.parseInt(itmpc);
-			int totalPc = numPrice*posQuantity;
-			posVector.add(String.valueOf(totalPc));
+			double numPrice = Double.parseDouble(itmpc);
+			double totalPc = numPrice*posQuantity;
+			posVector.add(String.format("%.2f",totalPc));
 
 			posDefTableModel.addRow(posVector);
 
@@ -432,11 +439,14 @@ public class POS extends JFrame implements ActionListener{
 					
 					for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
 					String strTotal = posTable.getValueAt(a,5).toString();
-					int parNumTotal = Integer.parseInt(strTotal);
+					double parNumTotal = Double.parseDouble(strTotal);
 
 					// int valueTotal = Integer.parseInt(String.valueOf(posDefTableModel.getValueAt(a,5)));
 					b+=parNumTotal;
-					lblNumTotal.setText(String.valueOf(b));
+					String parB = String.format("\u20B1 %,.2f",b);
+					byte[] charset = parB.getBytes("UTF-8"); 
+					String newstr = new String(charset, "UTF-8");   
+					lblNumTotal.setText(newstr);
 					
 
 						
@@ -560,14 +570,18 @@ public class POS extends JFrame implements ActionListener{
 				int mainOption = JOptionPane.showConfirmDialog(this, "Are you sure to delete the selected row?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
 				if(mainOption == 0){
-					int individual = Integer.parseInt(posTable.getValueAt(mm,5).toString());
-					lblNumTotal.setText(String.valueOf(b-individual));
+					double individual = Double.parseDouble(posTable.getValueAt(mm,5).toString());
+
+					char peso = '\u20B1';
+					String parB = String.format( peso + " %,.2f",b-individual);
+					lblNumTotal.setText(parB);
 
 					posDefTableModel.removeRow(mm);
 					JOptionPane.showMessageDialog(this,"Successfully Deleted!");
 					posTable.getSelectionModel().clearSelection();
 
 					b-=individual;
+					setter.doClick();
 
 					
 				}
@@ -575,6 +589,27 @@ public class POS extends JFrame implements ActionListener{
 			 }
 		}
 
+
+
+		else if(e.getSource() == transBtn[1]){
+			Discount cd = new Discount();
+			cd.userDiscount();
+		}
+
+
+		else if(e.getSource() == setter){
+			int rc = posTable.getRowCount();
+
+			if(rc == 0){
+							transBtn[1].setEnabled(false);
+							transBtn[2].setEnabled(false);
+					}
+
+					else{
+							transBtn[1].setEnabled(true);
+							transBtn[2].setEnabled(true);
+					}
+		}
 
 	
 	}
