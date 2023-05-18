@@ -94,6 +94,7 @@ public class POS extends JFrame implements ActionListener{
 	static String itmcd;
 	static String itmnm;
 	static String itmst;
+	static String itmpc;
 
 	//this part is for the experimental button
 	static JButton adder;
@@ -199,7 +200,7 @@ public class POS extends JFrame implements ActionListener{
 
    		//this part is for the value of the total amount
    		lblNumTotal = new JLabel();
-   		lblNumTotal.setText("Total Amount");
+   		// lblNumTotal.setText("Total Amount");
    		lblNumTotal.setBounds(830, 180, 420, 40);
    		lblNumTotal.setHorizontalAlignment(JLabel.CENTER);
    		lblNumTotal.setForeground(new Color(0xED9D1F));
@@ -281,7 +282,7 @@ public class POS extends JFrame implements ActionListener{
   	}
 
 
-
+ 	int posQuantity;
 	
 
 	@Override
@@ -333,8 +334,11 @@ public class POS extends JFrame implements ActionListener{
 					int parsedQuantityNum = Integer.parseInt(quantity.getText());
 					ShowInventory sh = new ShowInventory();
 					sh.inventory();
+					sh.expBtn.doClick();
 					sh.numQuanti = parsedQuantityNum;
+					posQuantity = parsedQuantityNum;
 					// sh.setVisible(true);
+
 
 				}
 
@@ -355,7 +359,153 @@ public class POS extends JFrame implements ActionListener{
 			posVector.add(itmcd);
 			posVector.add(itmnm);
 			posVector.add(itmst);
+			posVector.add(itmpc);
+			posVector.add(String.valueOf(posQuantity));
+
+			int numPrice = Integer.parseInt(itmpc);
+			int totalPc = numPrice*posQuantity;
+			posVector.add(String.valueOf(totalPc));
+
 			posDefTableModel.addRow(posVector);
+
+			// int b = 0;
+			// for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
+			// int valueTotal = Integer.parseInt(String.valueOf(posDefTableModel.getValueAt(a,5)));
+			// b+=valueTotal;
+			// lblNumTotal.setText(String.valueOf(b));
+			// }
+
+			try{
+
+				int intRc = posTable.getRowCount();
+
+			int selRow = posTable.getSelectedRow();
+
+			if(intRc == 0){}
+
+			else{
+
+				if(selRow == -1 && intRc == 0){System.out.println("Yes");}
+				
+
+				else{
+
+					
+					int b = 0;
+					
+					for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
+					String strTotal = posTable.getValueAt(a,5).toString();
+					int parNumTotal = Integer.parseInt(strTotal);
+
+					// int valueTotal = Integer.parseInt(String.valueOf(posDefTableModel.getValueAt(a,5)));
+					b+=parNumTotal;
+					lblNumTotal.setText(String.valueOf(b));
+
+						
+
+
+					
+					}
+
+				}
+
+				
+				
+			}
+
+			}
+
+
+			catch(Exception mand){
+				
+			}
+			
+			
+			
+
+
+
+			// if(Integer.parseInt(String.valueOf(posTable.getSelectedRow())) == -1){
+			// 	if(Integer.parseInt(String.valueOf(posTable.getRowCount())) ==0){
+			// 		System.out.println("0");
+			// 	}
+
+			// 	else{
+			// 		System.out.println("1");
+
+			// 		int b = 0;
+			// 		int c = 0;
+			// 		for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
+			// 		String strTotal = posDefTableModel.getValueAt(c,5).toString();
+			// 		int parNumTotal = Integer.parseInt(strTotal);
+
+			// 		// int valueTotal = Integer.parseInt(String.valueOf(posDefTableModel.getValueAt(a,5)));
+			// 		b+=parNumTotal;
+			// 		lblNumTotal.setText(String.valueOf(b));
+			// 		c++;
+			// 		}
+			// 	}
+
+
+			// }
+
+			
+				
+					// int b = 0;
+					// for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
+					// int valueTotal = Integer.parseInt(posDefTableModel.getValueAt(a,5).toString());
+					// b+=valueTotal;
+					// lblNumTotal.setText(String.valueOf(b));
+					// }
+
+				
+				
+
+			
+
+			// if(Integer.parseInt(String.valueOf(posTable.getRowCount())) ==0){}
+
+			// else{
+			// 	if (Integer.parseInt(String.valueOf(posTable.getSelectedRow())) == -1){
+
+			// 	}
+
+
+			// 	else{
+			// 		int b = 0;
+			// 		for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
+			// 		int valueTotal = Integer.parseInt(posDefTableModel.getValueAt(a,5).toString());
+			// 		b+=valueTotal;
+			// 		lblNumTotal.setText(String.valueOf(b));
+			// 		}
+			// 	}
+			// }
+
+			// else if (Integer.parseInt(String.valueOf(posTable.getSelectedRow())) == -1){
+
+			// }
+
+			// else{
+			// 	int b = 0;
+			// 	for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
+			// 	int valueTotal = Integer.parseInt(posDefTableModel.getValueAt(a,5).toString());
+			// 	b+=valueTotal;
+			// 	lblNumTotal.setText(String.valueOf(b));
+			// 	}
+			// }
+
+
+			
+
+
+
+
+
+
+
+
+
+			// lblNumTotal.setText(String.valueOf(totalPc));
 			// System.out.println(itmcd);
 			// System.out.println(itmnm);
 			// System.out.println(itmst);
