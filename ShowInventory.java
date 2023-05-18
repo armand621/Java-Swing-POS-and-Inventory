@@ -84,6 +84,8 @@ public class ShowInventory extends JFrame implements ActionListener{
 	//this part is for the experiment button
 	JButton expBtn;
 
+	double numQuanti;
+
 	void inventory(){
 
 		setSize(835,510);
@@ -235,7 +237,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 	}
 
-	int numQuanti;
+	
 	// int mm = table.getSelectedRow();
 
 	void getTableValue(){
@@ -293,6 +295,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null,"Successfully Added!");
 
 				POS.srcBtn.setEnabled(true);
+				POS.setter.doClick();
 				
 				// srcClear.doClick();
 				// expBtn.doClick();
