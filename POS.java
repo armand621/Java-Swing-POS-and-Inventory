@@ -66,7 +66,7 @@ public class POS extends JFrame implements ActionListener{
 	JTextField quantity;
 
 	//this part is for the button of the search item
-	JButton srcBtn;
+	static JButton srcBtn;
 
 	//this part is for the integer value of the invoice number
 	int invoiceNum = 1000000;
@@ -99,16 +99,20 @@ public class POS extends JFrame implements ActionListener{
 	//this part is for the experimental button
 	static JButton adder;
 
+	// static JButton setter;
+
 
 	//this part will be commented out since it was just for sample purpose only
 	// JScrollPane scrollpane = new JScrollPane(frObj.table);
+
+	int b;
 
 	void pos(){
 
 		setSize(1250,600);
 		setLocationRelativeTo(null);
 		setLayout(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setResizable(false);
 		setUndecorated(true);
 		getContentPane().setBackground(darkBlue);
@@ -124,6 +128,14 @@ public class POS extends JFrame implements ActionListener{
 		adder.setVisible(false);
 		adder.addActionListener(this);
 		add(adder);
+
+
+
+		// setter = new JButton();
+		// setter.setBounds(20,0,10,20);
+		// setter.setVisible(false);
+		// setter.addActionListener(this);
+		// add(setter);
 
 		 closeBtn = new JButton();
 		 closeBtn.setBounds(1200,0,50,20);
@@ -217,6 +229,7 @@ public class POS extends JFrame implements ActionListener{
    			transBtn[b].setBackground(gold);
    			transBtn[b].setForeground(darkBlue);
    			transBtn[b].setFont(arial18b);
+   			transBtn[b].addActionListener(this);
    			add(transBtn[b]);
    			transBtnY+=60;
    		}
@@ -259,6 +272,20 @@ public class POS extends JFrame implements ActionListener{
    		mainLbl[3].setText(String.valueOf(invoiceNum));
    		mainLbl[3].setFont(arial25b);
    		mainLbl[3].setForeground(darkBlue);
+
+
+
+   		//this part is for the table
+   		posTable.setFocusable(false);
+		posTable.setRowSelectionAllowed(true);
+		posTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		posTable.setRowHeight(25);
+
+		posTable.setDefaultEditor(Object.class, null);
+		posTable.getTableHeader().setEnabled(false);
+		posTable.getTableHeader().setPreferredSize(new Dimension(50, 30));
+
+		rdr.setHorizontalAlignment(JLabel.CENTER);
 
 
 
@@ -334,9 +361,19 @@ public class POS extends JFrame implements ActionListener{
 					int parsedQuantityNum = Integer.parseInt(quantity.getText());
 					ShowInventory sh = new ShowInventory();
 					sh.inventory();
-					sh.expBtn.doClick();
+					// sh.expBtn.doClick();
 					sh.numQuanti = parsedQuantityNum;
 					posQuantity = parsedQuantityNum;
+
+					
+					int aRowCount = posTable.getRowCount();
+					ShowInventory.posRowCount = aRowCount;
+					srcBtn.setEnabled(false);
+
+					// ShowInventory.code = Integer.parseInt(String.valueOf(posTable.getValueAt(0,0)));
+					// // setter.doClick();
+
+
 					// sh.setVisible(true);
 
 
@@ -391,7 +428,7 @@ public class POS extends JFrame implements ActionListener{
 				else{
 
 					
-					int b = 0;
+					b = 0;
 					
 					for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
 					String strTotal = posTable.getValueAt(a,5).toString();
@@ -400,6 +437,7 @@ public class POS extends JFrame implements ActionListener{
 					// int valueTotal = Integer.parseInt(String.valueOf(posDefTableModel.getValueAt(a,5)));
 					b+=parNumTotal;
 					lblNumTotal.setText(String.valueOf(b));
+					
 
 						
 
@@ -511,6 +549,34 @@ public class POS extends JFrame implements ActionListener{
 			// System.out.println(itmst);
 		}
 
+
+		else if(e.getSource() == transBtn[0]){
+				int mm = posTable.getSelectedRow();
+
+			if(posTable.getSelectedRow() == -1){
+				JOptionPane.showMessageDialog(this,"Select row to delete.");
+			}
+			else if(posTable.isRowSelected(mm)){
+				int mainOption = JOptionPane.showConfirmDialog(this, "Are you sure to delete the selected row?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+				if(mainOption == 0){
+					int individual = Integer.parseInt(posTable.getValueAt(mm,5).toString());
+					lblNumTotal.setText(String.valueOf(b-individual));
+
+					posDefTableModel.removeRow(mm);
+					JOptionPane.showMessageDialog(this,"Successfully Deleted!");
+					posTable.getSelectionModel().clearSelection();
+
+					b-=individual;
+
+					
+				}
+
+			 }
+		}
+
+
+	
 	}
 
 
