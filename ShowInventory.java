@@ -24,7 +24,8 @@ public class ShowInventory extends JFrame implements ActionListener{
 	Color darkBlue = new Color(0x222E50);
 	Color darkOrange = new Color(0xFF8C00);
 
-	JButton closeBtn;
+	//this part was commented out because I am testing for the other process
+	// JButton closeBtn;
 
 	//this part is for making an object of the class Frame, which consist of the table
 	Frame objFr = new Frame();
@@ -85,12 +86,12 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 	void inventory(){
 
-		setSize(800,490);
+		setSize(835,510);
 		setLocationRelativeTo(null);
 		setLayout(null);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setResizable(false);
-		setUndecorated(true);
+		// setUndecorated(true);
 		getContentPane().setBackground(new Color(0xf3f0f0));
 
 
@@ -100,13 +101,13 @@ public class ShowInventory extends JFrame implements ActionListener{
 		expan.add(scrollpane);
 
 		//this part is for the close button
-		closeBtn = new JButton();
-		closeBtn.setBounds(750,0,50,20);
-		closeBtn.setBackground(new Color(0x800000));
-		closeBtn.setForeground(Color.WHITE);
-		closeBtn.setText("X");
-		closeBtn.setFocusable(false);
-		closeBtn.addActionListener(this);
+		// closeBtn = new JButton();
+		// closeBtn.setBounds(750,0,50,20);
+		// closeBtn.setBackground(new Color(0x800000));
+		// closeBtn.setForeground(Color.WHITE);
+		// closeBtn.setText("X");
+		// closeBtn.setFocusable(false);
+		// closeBtn.addActionListener(this);
 
 		//this part is for the experimental button
 		expBtn = new JButton();
@@ -227,7 +228,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 		add(txtSearch);
 		add(lblSearch);
 		add(srcClear);
-		add(closeBtn);
+		// add(closeBtn);
 		add(expan);
 		
 		setVisible(true);
@@ -252,21 +253,23 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 
 	int mm;
+	static int code;
+	static int posRowCount;
 
 	@Override
 	public void actionPerformed(ActionEvent e){
 
-		if(e.getSource() == closeBtn){
-			int closeOpt = JOptionPane.showConfirmDialog(null, "Are you sure to exit?", "Confirmation", JOptionPane.YES_NO_OPTION);
-			if(closeOpt==0){
-				// setVisible(false);
-				// dispose();
-				System.exit(0);
-			}
-		}
+		// if(e.getSource() == closeBtn){
+		// 	int closeOpt = JOptionPane.showConfirmDialog(null, "Are you sure to exit?", "Confirmation", JOptionPane.YES_NO_OPTION);
+		// 	if(closeOpt==0){
+		// 		// setVisible(false);
+		// 		// dispose();
+		// 		System.exit(0);
+		// 	}
+		// }
 
 
-		else if(e.getSource() == btnAdd){
+		if(e.getSource() == btnAdd){
 
 			// int mm = table.getSelectedRow();
 
@@ -288,8 +291,11 @@ public class ShowInventory extends JFrame implements ActionListener{
 				POS.adder.doClick();
 
 				JOptionPane.showMessageDialog(null,"Successfully Added!");
+
+				POS.srcBtn.setEnabled(true);
 				
-				srcClear.doClick();
+				// srcClear.doClick();
+				// expBtn.doClick();
 				// int newStock = intStock - numQuanti;
 				// defTableModel.setValueAt(String.valueOf(newStock), mm,5);
 				// // setVisible(false);
@@ -312,13 +318,24 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 
 		else if (e.getSource() == expBtn){
-			POS ps = new POS();
-			if(ps.posTable.getRowCount() == 0){}
-
-			else{
-			
-			String code = ps.posTable.getValueAt(0,0).toString();
+			POS j = new POS();
 			System.out.println(code);
+			
+		
+
+			
+				// System.out.println("true");
+				// System.out.println(ps.posDefTableModel.getRowCount());
+				// System.out.println(posRowCount);
+
+			
+
+			
+				// System.out.println("edadf");
+			// System.out.println(POS.posTable.getValueAt(0,0).toString());
+	
+
+			// System.out.println("Successfully Clicked");
 
 			// switch(code){
 			// 	case "00001":
@@ -327,7 +344,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 			// }
 			
 
-		}
+	
 
 		}
 
