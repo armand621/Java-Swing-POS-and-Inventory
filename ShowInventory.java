@@ -42,7 +42,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 		{"00001", "Argentina Corn Beef", "In-can Corn Beef", "50", "175 grams", "100", "10", "High Stocks"},
 		{"00002", "Rebisco Crackers", "Biscuit", "7", "30 grams", "50", "10", "High Stocks"},
-		{"00003", "Nature Spring Mineral Water", "Mineral Water", "P10", "500 Ml", "60", "10", "High Stocks"},
+		{"00003", "Nature Spring Mineral Water", "Mineral Water", "10", "500 Ml", "60", "10", "High Stocks"},
 		{"00004", "LM Pancit Canton", "Noodles", "18", "100 grams", "90", "10", "High Stocks"},
 		{"00005", "Fiesta Cooking Oil", "Palm-oil for cooking", "70", "300 Ml", "100", "10", "High Stocks"},
 		{"00006", "555 Sardines", "In-can Sardines", "23", "130 grams", "70", "10", "High Stocks"},
@@ -80,12 +80,15 @@ public class ShowInventory extends JFrame implements ActionListener{
 	JLabel lblSearch;
 	JButton srcClear, btnAdd;
 
+	//this part is for the experiment button
+	JButton expBtn;
+
 	void inventory(){
 
 		setSize(800,490);
 		setLocationRelativeTo(null);
 		setLayout(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setUndecorated(true);
 		getContentPane().setBackground(new Color(0xf3f0f0));
@@ -104,6 +107,14 @@ public class ShowInventory extends JFrame implements ActionListener{
 		closeBtn.setText("X");
 		closeBtn.setFocusable(false);
 		closeBtn.addActionListener(this);
+
+		//this part is for the experimental button
+		expBtn = new JButton();
+		expBtn.setBounds(10,10,100,20);
+		expBtn.setVisible(false);
+		expBtn.addActionListener(this);
+		add(expBtn);
+
 
 
 		//setting the properties for the table
@@ -238,6 +249,8 @@ public class ShowInventory extends JFrame implements ActionListener{
 			objPos.posDefTableModel.setValueAt(itmcd,0,2);
 		}	
 	}
+
+
 	int mm;
 
 	@Override
@@ -247,7 +260,8 @@ public class ShowInventory extends JFrame implements ActionListener{
 			int closeOpt = JOptionPane.showConfirmDialog(null, "Are you sure to exit?", "Confirmation", JOptionPane.YES_NO_OPTION);
 			if(closeOpt==0){
 				// setVisible(false);
-				dispose();
+				// dispose();
+				System.exit(0);
 			}
 		}
 
@@ -263,17 +277,19 @@ public class ShowInventory extends JFrame implements ActionListener{
 			else{
 				// String stock = table.getValueAt(mm,5).toString();
 				// int intStock = Integer.parseInt(stock);
+				dispose();
 				POS mp = new POS();
 				mm = table.getSelectedRow();
 				POS.itmcd = table.getValueAt(mm,0).toString();
 				POS.itmnm = table.getValueAt(mm,1).toString();
 				POS.itmst = table.getValueAt(mm,4).toString();
+				POS.itmpc = table.getValueAt(mm,3).toString();
 
 				POS.adder.doClick();
 
-				mp.posVector = new Vector<String>();
-				dispose();
-
+				JOptionPane.showMessageDialog(null,"Successfully Added!");
+				
+				srcClear.doClick();
 				// int newStock = intStock - numQuanti;
 				// defTableModel.setValueAt(String.valueOf(newStock), mm,5);
 				// // setVisible(false);
@@ -291,8 +307,28 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 
 		else if(e.getSource() == srcClear){
-
 			txtSearch.setText("");
+		}
+
+
+		else if (e.getSource() == expBtn){
+			POS ps = new POS();
+			if(ps.posTable.getRowCount() == 0){}
+
+			else{
+			
+			String code = ps.posTable.getValueAt(0,0).toString();
+			System.out.println(code);
+
+			// switch(code){
+			// 	case "00001":
+			// 		String next = ps.posTable.getValueAt(0,4).toString();
+			// 		defTableModel.setValueAt(Integer.parseInt(next)-numQuanti,0,5);
+			// }
+			
+
+		}
+
 		}
 
 
