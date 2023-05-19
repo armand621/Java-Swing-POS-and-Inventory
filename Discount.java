@@ -29,6 +29,15 @@ public class Discount extends JFrame implements ActionListener{
 
 	JButton apply;
 
+
+	String totalStr = POS.lblNumTotal.getText();
+	String total1 = totalStr.replace(',',' ');
+	String total2 = total1.replace(" ", "");
+	int strLn = total2.length();
+	String cutted = total2.substring(1,strLn).trim();
+	double parseCut = Double.parseDouble(cutted);
+
+
 	void userDiscount(){
 		setSize(500,300);
 		setLocationRelativeTo(null);
@@ -46,6 +55,8 @@ public class Discount extends JFrame implements ActionListener{
 			rdBtn[a].setFont(arial15b);
 			rdBtn[a].setForeground(POS.gold);
 			rdBtn[a].setOpaque(false);
+			rdBtn[a].addActionListener(this);
+			rdBtn[a].setFocusable(false);
 			btnGr.add(rdBtn[a]);
 			add(rdBtn[a]);
 			btnX+=200;
@@ -76,19 +87,85 @@ public class Discount extends JFrame implements ActionListener{
 		apply.setFont(arial18b);
 		apply.addActionListener(this);
 		add(apply);
-
+		
 
 		setVisible(true);
 	}
 
+	
 
+	// double total = Double.parseDouble(POS.lblNumTotal.getText());
 
 	@Override
 	public void actionPerformed(ActionEvent e){
 
 		if(e.getSource() == apply){
-			dispose();
+
+
+		if(rdBtn[0].isSelected() == true){
+			double discountNew = parseCut * 0.03;
+			char peso = '\u20B1';
+			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
+			POS.lblNumTotal.setText(parB);
+			
 		}
+
+		else if(rdBtn[1].isSelected() == true){
+			double discountNew = parseCut * 0.25;
+			char peso = '\u20B1';
+			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
+			POS.lblNumTotal.setText(parB);
+			
+
+		}
+
+		else if(rdBtn[2].isSelected() == true){
+			double discountNew = parseCut * 0.20;
+			char peso = '\u20B1';
+			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
+			POS.lblNumTotal.setText(parB);
+			
+
+		}
+
+		else if(rdBtn[3].isSelected() == true){
+			double discountNew = parseCut * 0.15;
+			char peso = '\u20B1';
+			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
+			POS.lblNumTotal.setText(parB);
+			
+
+		}
+
+
+			POS.srcBtn.setEnabled(false);
+			dispose();
+
+		}
+
+		// else if(e.getSource() == rdBtn[0]){
+		// 	double discountNew = parseCut * 0.03;
+		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
+			
+		// }
+
+		// else if(e.getSource() == rdBtn[1]){
+		// 	double discountNew = parseCut * 0.25;
+		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
+			
+		// }
+
+		// else if(e.getSource() == rdBtn[2]){
+		// 	double discountNew = parseCut * 0.20;
+		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
+			
+		// }
+
+		// else if(e.getSource() == rdBtn[3]){
+		// 	double discountNew = parseCut * 0.15;
+		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
+			
+		// }
 
 	}
 

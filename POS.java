@@ -51,7 +51,7 @@ public class POS extends JFrame implements ActionListener{
 	JLabel [] lblDate = new JLabel[strDate.length];
 
 	//this part is for the total amount label
-	JLabel lblTotal, lblNumTotal;
+	static JLabel lblTotal, lblNumTotal;
 
 	//this part is for the transaction buttons
 	String [] strTransBtn = {"Remove Item", "Discount", "Payment", "Cancel"};
@@ -64,7 +64,7 @@ public class POS extends JFrame implements ActionListener{
 
 
 	//this part is for the textfield of the quantity
-	JTextField quantity;
+	static JTextField quantity;
 
 	//this part is for the button of the search item
 	static JButton srcBtn;
@@ -106,7 +106,8 @@ public class POS extends JFrame implements ActionListener{
 	//this part will be commented out since it was just for sample purpose only
 	// JScrollPane scrollpane = new JScrollPane(frObj.table);
 
-	double b, posQuantity;;
+	static double b;
+	static int posQuantity, parsedQuantityNum;
 
 	void pos(){
 
@@ -293,6 +294,11 @@ public class POS extends JFrame implements ActionListener{
 		rdr.setHorizontalAlignment(JLabel.CENTER);
 
 
+		for(int d=0; d<=posHeader.length-1; d++){
+			posTable.getColumnModel().getColumn(d).setCellRenderer(rdr);
+		}
+		
+
 
 
    		//this part is for adding components to the frame
@@ -362,18 +368,32 @@ public class POS extends JFrame implements ActionListener{
 		    else{
 			//this is for the try and catch
 				try{
-					double parsedQuantityNum = Double.parseDouble(quantity.getText());
-					ShowInventory sh = new ShowInventory();
-					sh.inventory();
+					parsedQuantityNum = Integer.parseInt(quantity.getText());
+					if (parsedQuantityNum == 0) {
+						JOptionPane.showMessageDialog(this,"Quantity number cannot be zero.");
+					}
+
+					else if (parsedQuantityNum < 0) {
+						JOptionPane.showMessageDialog(this,"Quantity number cannot be negative number.");
+					}
+
+					else{
+
+						ShowInventory sh = new ShowInventory();
+						sh.inventory();
 					// sh.expBtn.doClick();
-					sh.numQuanti = parsedQuantityNum;
-					posQuantity = parsedQuantityNum;
+					// ShowInventory.numQuanti = parsedQuantityNum;
+						posQuantity = parsedQuantityNum;
+					// ShowInventory.numQuanti = posQuantity;
 
 					
-					int aRowCount = posTable.getRowCount();
-					ShowInventory.posRowCount = aRowCount;
-					srcBtn.setEnabled(false);
+						int aRowCount = posTable.getRowCount();
+						ShowInventory.posRowCount = aRowCount;
+						srcBtn.setEnabled(false);
 
+
+					}
+					
 
 
 
@@ -570,10 +590,13 @@ public class POS extends JFrame implements ActionListener{
 				int mainOption = JOptionPane.showConfirmDialog(this, "Are you sure to delete the selected row?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
 				if(mainOption == 0){
-					double individual = Double.parseDouble(posTable.getValueAt(mm,5).toString());
+
+					String zzz = posTable.getValueAt(mm,5).toString();
+					Double individual = Double.parseDouble(zzz);
 
 					char peso = '\u20B1';
-					String parB = String.format( peso + " %,.2f",b-individual);
+					double yyy = b-individual;
+					String parB = String.format(peso + " %,.2f", yyy);
 					lblNumTotal.setText(parB);
 
 					posDefTableModel.removeRow(mm);
@@ -582,6 +605,11 @@ public class POS extends JFrame implements ActionListener{
 
 					b-=individual;
 					setter.doClick();
+
+					int ctRow = posTable.getRowCount();
+					if (ctRow<=0) {
+						srcBtn.setEnabled(true);
+					}
 
 					
 				}
@@ -594,6 +622,7 @@ public class POS extends JFrame implements ActionListener{
 		else if(e.getSource() == transBtn[1]){
 			Discount cd = new Discount();
 			cd.userDiscount();
+			transBtn[1].setEnabled(false);
 		}
 
 
