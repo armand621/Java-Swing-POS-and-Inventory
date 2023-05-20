@@ -27,7 +27,7 @@ public class Discount extends JFrame implements ActionListener{
 	Font arial15b = new Font("Arial", Font.BOLD,16);
 	Font arial18b = new Font("Arial", Font.BOLD,18);
 
-	JButton apply;
+	JButton apply,cancel;
 
 
 	String totalStr = POS.lblNumTotal.getText();
@@ -77,7 +77,7 @@ public class Discount extends JFrame implements ActionListener{
 		add(lblDisc);
 
 		apply = new JButton();
-		apply.setBounds(190,220,120,30);
+		apply.setBounds(100,220,120,30);
 		apply.setOpaque(true);
 		apply.setHorizontalAlignment(SwingConstants.CENTER);
 		apply.setBackground(POS.gold);
@@ -88,6 +88,17 @@ public class Discount extends JFrame implements ActionListener{
 		apply.addActionListener(this);
 		add(apply);
 		
+		cancel = new JButton();
+		cancel.setBounds(280,220,120,30);
+		cancel.setOpaque(true);
+		cancel.setHorizontalAlignment(SwingConstants.CENTER);
+		cancel.setBackground(POS.darkOrange);
+		cancel.setForeground(POS.darkBlue);
+		cancel.setFocusable(false);
+		cancel.setText("Cancel");
+		cancel.setFont(arial18b);
+		cancel.addActionListener(this);
+		add(cancel);		
 
 		setVisible(true);
 	}
@@ -137,10 +148,20 @@ public class Discount extends JFrame implements ActionListener{
 
 		}
 
+		else{
+			JOptionPane.showMessageDialog(null,"No discount selected.");
+		}
+
 
 			POS.srcBtn.setEnabled(false);
 			dispose();
 
+		}
+
+		else if(e.getSource() == cancel){
+			POS.srcBtn.setEnabled(true);
+			POS.transBtn[1].setEnabled(true);
+			dispose();
 		}
 
 		// else if(e.getSource() == rdBtn[0]){
