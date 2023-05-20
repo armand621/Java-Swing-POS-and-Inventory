@@ -225,7 +225,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 		srcClear.setFocusable(false);
 		srcClear.setFont(arial15b);
 
-		System.out.println(numQuanti);
+		// System.out.println(numQuanti);
 
 		add(btnAdd);
 		add(txtSearch);
@@ -337,7 +337,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 		else if (e.getSource() == expBtn){
 			POS j = new POS();
-			System.out.println(code);
+			// System.out.println(code);
 			
 		
 

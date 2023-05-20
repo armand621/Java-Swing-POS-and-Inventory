@@ -54,8 +54,8 @@ public class POS extends JFrame implements ActionListener{
 	static JLabel lblTotal, lblNumTotal;
 
 	//this part is for the transaction buttons
-	String [] strTransBtn = {"Remove Item", "Discount", "Payment", "Cancel"};
-	JButton [] transBtn = new JButton[strTransBtn.length];
+	static String [] strTransBtn = {"Remove Item", "Discount", "Payment", "Cancel"};
+	static JButton [] transBtn = new JButton[strTransBtn.length];
 
 
 	//this part is for labels
@@ -623,6 +623,13 @@ public class POS extends JFrame implements ActionListener{
 			Discount cd = new Discount();
 			cd.userDiscount();
 			transBtn[1].setEnabled(false);
+			srcBtn.setEnabled(false);
+		}
+
+		else if (e.getSource() == transBtn[2]) {
+			Payment pm = new Payment();
+			pm.userPayment();
+			
 		}
 
 
