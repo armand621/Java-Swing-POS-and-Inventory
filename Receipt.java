@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 
 
 public class Receipt extends JFrame implements ActionListener{
+	static int recRow;
 
 	JButton closeBtn;
 
@@ -34,9 +35,10 @@ public class Receipt extends JFrame implements ActionListener{
 	//this part is for the table
 	String [][] recData = {
 	};
-	String[] recHeader = {"Item Code", "Item Name", "Size", "Price", "Quantity", "Total"};
+	static String[] recHeader = {"Item Code", "Item Name", "Size", "Price", "Quantity", "Total"};
 
-	DefaultTableModel recDefTableModel = new DefaultTableModel(recData, recHeader);
+
+	DefaultTableModel recDefTableModel = new DefaultTableModel(POS.exp, recHeader);
 	JTable recTable = new JTable(recDefTableModel);
 	JScrollPane recScrollpane = new JScrollPane(recTable);
 
@@ -46,8 +48,7 @@ public class Receipt extends JFrame implements ActionListener{
 
 	JPanel expan;
 
-	static int recRow;
-
+	
 	
 
 	String [] texts = {"West Fortune Trading Corp.", "O'Donnell Capas, Tarlac Philippines 2315","-----Official Receipt-----","",""};
@@ -56,6 +57,8 @@ public class Receipt extends JFrame implements ActionListener{
 
 	static String[] str = {"","",""};
 	static JLabel[] labels = new JLabel[str.length]; 
+
+	
 
 
 	void clientReceipt(){
@@ -76,7 +79,6 @@ public class Receipt extends JFrame implements ActionListener{
 		 closeBtn.setFocusable(false);
 		 closeBtn.addActionListener(this);
 		 add(closeBtn);
-
 
 
 		JPanel expan = new JPanel();
@@ -138,6 +140,8 @@ public class Receipt extends JFrame implements ActionListener{
 		for(int d=0; d<=recHeader.length-1; d++){
 			recTable.getColumnModel().getColumn(d).setCellRenderer(rdr);
 		}
+
+		
 
 
 		POS abc = new POS();
