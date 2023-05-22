@@ -110,6 +110,8 @@ public class POS extends JFrame implements ActionListener{
 	static double b;
 	static int posQuantity, parsedQuantityNum;
 
+	static String[][] exp; 
+
 	void pos(){
 
 		setSize(1250,600);
@@ -643,18 +645,20 @@ public class POS extends JFrame implements ActionListener{
 			pm.userPayment();
 			Receipt.recRow = posTable.getRowCount();
 
+			exp = new String [posTable.getRowCount()+1][6];
 
-			// for(int c=0; c<posTable.getRowCount(); c++){
-			// 	Receipt rv = new Receipt();
-			// 	for (int d =0; d<6 ;d++ ) {
-			// 		POS cd = new POS();
-			// 		// recVector.add(cd.posTable.getValueAt())
+		
+
+			for(int c=0; c<posTable.getRowCount()+2; c++){
+			
+				for (int d =0; d<6 ;d++ ) {
 					
-			// 		rv.recVector.add(posDefTableModel.getValueAt(c,d).toString());
-			// 	}
-			// 	rv.recDefTableModel.addRow(rv.recVector);
-			// 	rv.recVector = new Vector<String>();
-			// }
+					// recVector.add(cd.posTable.getValueAt())
+					
+					exp[c][d] = posTable.getValueAt(c,d).toString();
+					// System.out.println(posTable.getValueAt(c,d).toString());
+				}
+			}
 
 		}
 
