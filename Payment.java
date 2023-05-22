@@ -24,7 +24,7 @@ public class Payment extends JFrame implements ActionListener{
 	Font arial15b = new Font("Arial", Font.BOLD,16);
 	Font arial18b = new Font("Arial", Font.BOLD,18);
 
-	JTextField numPayment;
+	static JTextField numPayment;
 
 	JButton apply, cancel;
 
@@ -142,7 +142,9 @@ public class Payment extends JFrame implements ActionListener{
 						ps.paymentSucess();
 
 						PmSucess.labels[1].setSize(200,30);
+						PmSucess.labels[2].setSize(200,30);
 						PmSucess.labels[3].setSize(200,30);
+						PmSucess.labels[5].setSize(200,30);
 
 						PmSucess.labels[1].setText(POS.lblNumTotal.getText());
 

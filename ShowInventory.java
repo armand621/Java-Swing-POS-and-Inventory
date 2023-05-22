@@ -38,6 +38,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 	String[] header = {"Item Code", "Item Name", "Item Description", "Price", "Size", "Stocks", "Re-Order Point", "Remarks"};
 
 
+
 	//this part is for the data of the table
 	String[][] permData = {
 
@@ -73,7 +74,6 @@ public class ShowInventory extends JFrame implements ActionListener{
 	Vector<String> vector = new Vector<String>();
 
 	DefaultTableCellRenderer rdr = new DefaultTableCellRenderer();
-
 
 
 	//this part is for the search component of the table
@@ -153,6 +153,8 @@ public class ShowInventory extends JFrame implements ActionListener{
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setRowHeight(25);
+
+
 
 		//this part is for the search
 		//this part is for the txtSeach
