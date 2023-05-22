@@ -2,9 +2,10 @@
 //Programmer: Armand Robin I. Tangonan
 //github.com/armand621
 
-
-import java.util.regex.*;
+import java.io.*;
 import java.util.*;
+import java.lang.*;
+import java.util.regex.*;
 import javax.swing.*;
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -13,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.lang.*;
 import javax.swing.table.*;
 import javax.swing.event.*;
+
 
 
 public class PmSucess extends JFrame implements ActionListener{
@@ -27,8 +29,8 @@ public class PmSucess extends JFrame implements ActionListener{
 
 	JButton apply;
 
-	static String[] str = {"Total: ", "", "Change: ", ""};
-	static JLabel[] labels = new JLabel[str.length];
+	static String[] str = {"Total: ", "", "Payment: ", "", "Change: ", ""};
+	static JLabel[] labels = new JLabel[str.length]; 
 
 
 	String totalStr = POS.lblNumTotal.getText();
@@ -37,7 +39,8 @@ public class PmSucess extends JFrame implements ActionListener{
 	int strLn = total2.length();
 	String cutted = total2.substring(1,strLn).trim();
 	double parseCut = Double.parseDouble(cutted);
-
+	 
+	String txtPy;
 
 	void paymentSucess(){
 		setSize(500,300);
@@ -60,27 +63,44 @@ public class PmSucess extends JFrame implements ActionListener{
 
 	
 
-		int labelsX = 120;
-		int labelsX1 = 120;
+		int labelsX = 100;
+		int labelsX1 = 100;
+		int labelsX2 = 100;
 
 		for(int g =0; g<=labels.length-1; g++){
 			labels[g] = new JLabel();
 			labels[g].setText(str[g]);
-			labels[g].setBounds(labelsX, 80, 100, 30);
+			labels[g].setBounds(labelsX, 70, 100, 30);
 			labels[g].setForeground(POS.gold);
 			labels[g].setFont(arial23b);
 			add(labels[g]);
 			if(g>=2){
-				labels[g].setBounds(labelsX1, 150, 100, 30);
-				labelsX1+=120;
+				labels[g].setBounds(labelsX1, 120, 100, 30);
+				labelsX1+=150;
 			}
-			labelsX+=120;
+
+			if(g>=4){
+				labels[g].setBounds(labelsX2, 170, 100, 30);
+				labelsX2+=150;
+			}
+
+			labelsX+=150;
 		}
 		
-		labels[3].setText(Payment.parB);
+		labels[5].setText(Payment.parB);
+
+		// txtPy = Payment.numPayment.getText();
+		
+		// System.out.println(String.format("this is sample %,.2f ",txtPy));
+
+		double samsam = Double.parseDouble(Payment.numPayment.getText());
+		char peso = '\u20B1';
+
+		labels[3].setText(String.format(peso+" %,.2f ",samsam));
+	
 
 		apply = new JButton();
-		apply.setBounds(165,220,160,30);
+		apply.setBounds(165,250,160,30);
 		apply.setOpaque(true);
 		apply.setHorizontalAlignment(SwingConstants.CENTER);
 		apply.setBackground(POS.gold);
@@ -103,7 +123,11 @@ public class PmSucess extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 
 		if (e.getSource() == apply) {
-			JOptionPane.showMessageDialog(null,String.format("this is the sample change %s", Payment.parB));
+			Receipt rp = new Receipt();
+			rp.clientReceipt();
+
+			POS.hideClose.doClick();
+			dispose();
 			
 		}
 

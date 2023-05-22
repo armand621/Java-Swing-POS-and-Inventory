@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 public class POS extends JFrame implements ActionListener{
 
 	JButton closeBtn;
+	static JButton hideClose;
 
 	static Color gold = new Color(0xFCCB06);
 	static Color darkBlue = new Color(0x222E50);
@@ -147,6 +148,16 @@ public class POS extends JFrame implements ActionListener{
 		 closeBtn.setFocusable(false);
 		 closeBtn.addActionListener(this);
 		 add(closeBtn);
+
+
+		 hideClose = new JButton();
+		 hideClose.setBounds(1200,50,50,20);
+		 hideClose.setBackground(new Color(0x800000));
+		 hideClose.setForeground(Color.WHITE);
+		 hideClose.addActionListener(this);
+		 hideClose.setVisible(false);
+		 
+		 add(hideClose);
 
 
 
@@ -626,10 +637,25 @@ public class POS extends JFrame implements ActionListener{
 			srcBtn.setEnabled(false);
 		}
 
+
 		else if (e.getSource() == transBtn[2]) {
 			Payment pm = new Payment();
 			pm.userPayment();
-			
+			Receipt.recRow = posTable.getRowCount();
+
+
+			// for(int c=0; c<posTable.getRowCount(); c++){
+			// 	Receipt rv = new Receipt();
+			// 	for (int d =0; d<6 ;d++ ) {
+			// 		POS cd = new POS();
+			// 		// recVector.add(cd.posTable.getValueAt())
+					
+			// 		rv.recVector.add(posDefTableModel.getValueAt(c,d).toString());
+			// 	}
+			// 	rv.recDefTableModel.addRow(rv.recVector);
+			// 	rv.recVector = new Vector<String>();
+			// }
+
 		}
 
 
@@ -647,7 +673,10 @@ public class POS extends JFrame implements ActionListener{
 					}
 		}
 
-	
+
+		else if(e.getSource() == hideClose){
+			dispose();
+		}
 	}
 
 
