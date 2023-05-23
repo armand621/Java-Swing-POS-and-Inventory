@@ -15,9 +15,12 @@ import java.lang.*;
 import javax.swing.table.*;
 import javax.swing.event.*;
 
+
+import java.text.DateFormat;
+import java.util.Date;
+import javax.swing.Timer;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-
 
 
 public class Receipt extends JFrame implements ActionListener{
@@ -35,7 +38,7 @@ public class Receipt extends JFrame implements ActionListener{
 	//this part is for the table
 	String [][] recData = {
 	};
-	static String[] recHeader = {"Item Code", "Item Name", "Size", "Price", "Quantity", "Total"};
+	static String[] recHeader = {"Itm Cd", "Item Name", "Size", "Price", "Quantity", "Total"};
 
 
 	DefaultTableModel recDefTableModel = new DefaultTableModel(POS.exp, recHeader);
@@ -134,7 +137,9 @@ public class Receipt extends JFrame implements ActionListener{
 		//this are for experiment purppose only
 		recTable.setShowHorizontalLines(false);
 		recTable.setShowVerticalLines(false);
-		recTable.setTableHeader(null);
+		// recTable.setTableHeader(null);
+
+		recTable.getTableHeader().setBackground(Color.WHITE);
 
 
 		for(int d=0; d<=recHeader.length-1; d++){
@@ -163,17 +168,21 @@ public class Receipt extends JFrame implements ActionListener{
 
 
 
-		labels[0].setText("TOTAL: " + POS.lblNumTotal.getText());
+		labels[0].setText("TOTAL..........: " + POS.lblNumTotal.getText());
 		
 		double samsam = Double.parseDouble(Payment.numPayment.getText());
 		char peso = '\u20B1';
 
-		labels[1].setText("PAYMENT: " + String.format(peso+" %,.2f ",samsam));
+		labels[1].setText("PAYMENT........: " + String.format(peso+" %,.2f ",samsam));
 
-		labels[2].setText("CHANGE: " + Payment.parB);
+		labels[2].setText("CHANGE........: " + Payment.parB);
 
-
-
+		TableColumnModel tblmodel = recTable.getColumnModel();
+		tblmodel.getColumn(0).setPreferredWidth(45);
+		tblmodel.getColumn(1).setPreferredWidth(120);
+		tblmodel.getColumn(2).setPreferredWidth(60);
+		tblmodel.getColumn(3).setPreferredWidth(45);
+		tblmodel.getColumn(4).setPreferredWidth(45);
 		
 		// for(int c=0; c<recRow; c++){
 		// 		Receipt rv = new Receipt();

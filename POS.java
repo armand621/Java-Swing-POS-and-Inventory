@@ -394,6 +394,7 @@ public class POS extends JFrame implements ActionListener{
 
 						ShowInventory sh = new ShowInventory();
 						sh.inventory();
+						sh.setVisible(true);
 					// sh.expBtn.doClick();
 					// ShowInventory.numQuanti = parsedQuantityNum;
 						posQuantity = parsedQuantityNum;
@@ -645,13 +646,11 @@ public class POS extends JFrame implements ActionListener{
 			pm.userPayment();
 			Receipt.recRow = posTable.getRowCount();
 
-			exp = new String [posTable.getRowCount()+1][6];
+			exp = new String [posTable.getRowCount()][6];
 
-		
-
-			for(int c=0; c<posTable.getRowCount()+2; c++){
+			for(int c=0; c<posTable.getRowCount(); c++){
 			
-				for (int d =0; d<6 ;d++ ) {
+				for (int d=0; d<6; d++) {
 					
 					// recVector.add(cd.posTable.getValueAt())
 					

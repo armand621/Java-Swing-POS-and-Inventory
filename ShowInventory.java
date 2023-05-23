@@ -84,14 +84,14 @@ public class ShowInventory extends JFrame implements ActionListener{
 	//this part is for the experiment button
 	JButton expBtn;
 
-	static double numQuanti = POS.parsedQuantityNum;
+	// static double numQuanti = POS.parsedQuantityNum;
 
 	void inventory(){
 
 		setSize(740,510);
 		setLocationRelativeTo(null);
 		setLayout(null);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setResizable(false);
 		setUndecorated(true);
 		getContentPane().setBackground(new Color(0xf3f0f0));
@@ -236,7 +236,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 		add(closeBtn);
 		add(expan);
 		
-		setVisible(true);
+		setVisible(false);
 
 	}
 
@@ -257,7 +257,7 @@ public class ShowInventory extends JFrame implements ActionListener{
 	}
 
 
-	int mm;
+	// int mm;
 	static int code;
 	static int posRowCount;
 
@@ -286,14 +286,29 @@ public class ShowInventory extends JFrame implements ActionListener{
 			else{
 				// String stock = table.getValueAt(mm,5).toString();
 				// int intStock = Integer.parseInt(stock);
-				// setVisible(false);
-				dispose();
-				POS mp = new POS();
-				mm = table.getSelectedRow();
+				int mm = table.getSelectedRow();
 
 				String strStock = table.getValueAt(mm,5).toString();
-				double oldStock = Double.parseDouble(strStock);
-				defTableModel.setValueAt(String.valueOf(oldStock-numQuanti),mm,5);
+				System.out.println(strStock);
+				// double oldStock = Double.parseDouble(strStock);
+
+				System.out.println(POS.quantity.getText());
+
+
+				int parseStock = Integer.parseInt(strStock);
+
+				int newStock = parseStock - Integer.parseInt(POS.quantity.getText()) ;
+
+				System.out.println(newStock);
+
+				defTableModel.setValueAt(String.valueOf(newStock),0,0);
+				// defTableModel.setValueAt(String.valueOf(oldStock-numQuanti),mm,5);
+
+
+
+				// int stkVal = Integer.parseInt(permData[mm][5]);
+				// permData[mm][5] = String.valueOf(stkVal - numQuanti);
+
 
 
 
@@ -305,11 +320,12 @@ public class ShowInventory extends JFrame implements ActionListener{
 				POS.adder.doClick();
 
 				JOptionPane.showMessageDialog(null,"Successfully Added!");
-
+				
 				POS.srcBtn.setEnabled(true);
 				POS.setter.doClick();
 				POS.quantity.setText("");
-				numQuanti = POS.posQuantity;
+				// numQuanti = POS.posQuantity;
+				setVisible(false);
 
 
 				
