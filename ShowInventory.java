@@ -318,14 +318,14 @@ public class ShowInventory extends JFrame implements ActionListener{
 				POS.itmpc = table.getValueAt(mm,3).toString();
 
 				POS.adder.doClick();
-
+				setVisible(false);
 				JOptionPane.showMessageDialog(null,"Successfully Added!");
 				
 				POS.srcBtn.setEnabled(true);
 				POS.setter.doClick();
 				POS.quantity.setText("");
 				// numQuanti = POS.posQuantity;
-				setVisible(false);
+				
 
 
 				
