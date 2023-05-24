@@ -43,6 +43,8 @@ public class PmSucess extends JFrame implements ActionListener{
 	String txtPy;
 
 	void paymentSucess(){
+		
+
 		setSize(500,300);
 		setLocationRelativeTo(null);
 		setLayout(null);
@@ -50,6 +52,7 @@ public class PmSucess extends JFrame implements ActionListener{
 		setResizable(false);
 		setUndecorated(true);
 		getContentPane().setBackground(POS.darkBlue);
+		
 
 		
 		lblDisc.setText("Successful Transaction");
@@ -89,9 +92,6 @@ public class PmSucess extends JFrame implements ActionListener{
 		
 		labels[5].setText(Payment.parB);
 
-		// txtPy = Payment.numPayment.getText();
-		
-		// System.out.println(String.format("this is sample %,.2f ",txtPy));
 
 		double samsam = Double.parseDouble(Payment.numPayment.getText());
 		char peso = '\u20B1';
@@ -116,9 +116,6 @@ public class PmSucess extends JFrame implements ActionListener{
 	}
 
 	
-
-	// double total = Double.parseDouble(POS.lblNumTotal.getText());
-
 	@Override
 	public void actionPerformed(ActionEvent e){
 
@@ -131,127 +128,6 @@ public class PmSucess extends JFrame implements ActionListener{
 			
 		}
 
-		// if (e.getSource() == apply) {
-
-		// 	 if(numPayment.getText().equals("")){
-		//     	JOptionPane.showMessageDialog(this,"Please enter number into payment.");		    	
-		//     }
-
-
-		// 	 else if(numPayment.getText().isEmpty()){
-		//     	JOptionPane.showMessageDialog(this,"Please enter number into payment.");		    	
-		//     }
-
-		//      else if(numPayment.getText().isBlank()){
-		//     	JOptionPane.showMessageDialog(this,"Please enter number into payment.");		    	
-		//     }
-
-
-
-		//     else{
-
-		//     	try{
-		// 			// int parsedPayment = Integer.parseInt(numPayment.getText());
-		// 			double parsedPayment = Double.parseDouble(numPayment.getText());
-
-
-		// 			if (parsedPayment < parseCut) {
-		// 				JOptionPane.showMessageDialog(null,"Insufficient payment, please try again");
-		// 			}
-
-
-		// 			else{
-		// 				double change = parsedPayment - parseCut;
-		// 				char peso = '\u20B1';
-		// 				String parB = String.format( peso + " %,.2f",change);
-		// 				// POS.lblNumTotal.setText(parB);
-		// 				System.out.println("Your change is " + parB);
-
-		// 			}
-				
-
-
-		// 		}
-
-		// 		catch(Exception a){
-		// 		JOptionPane.showMessageDialog(null,String.format("This is the error %s",a));
-		// 		}
-		//     }
-			
-				
-		// }
-
-		// if(e.getSource() == apply){
-
-
-		// if(rdBtn[0].isSelected() == true){
-		// 	double discountNew = parseCut * 0.03;
-		// 	char peso = '\u20B1';
-		// 	String parB = String.format( peso + " %,.2f",parseCut-discountNew);
-		// 	POS.lblNumTotal.setText(parB);
-			
-		// }
-
-		// else if(rdBtn[1].isSelected() == true){
-		// 	double discountNew = parseCut * 0.25;
-		// 	char peso = '\u20B1';
-		// 	String parB = String.format( peso + " %,.2f",parseCut-discountNew);
-		// 	POS.lblNumTotal.setText(parB);
-			
-
-		// }
-
-		// else if(rdBtn[2].isSelected() == true){
-		// 	double discountNew = parseCut * 0.20;
-		// 	char peso = '\u20B1';
-		// 	String parB = String.format( peso + " %,.2f",parseCut-discountNew);
-		// 	POS.lblNumTotal.setText(parB);
-			
-
-		// }
-
-		// else if(rdBtn[3].isSelected() == true){
-		// 	double discountNew = parseCut * 0.15;
-		// 	char peso = '\u20B1';
-		// 	String parB = String.format( peso + " %,.2f",parseCut-discountNew);
-		// 	POS.lblNumTotal.setText(parB);
-			
-
-		// }
-
-		// else{
-		// 	JOptionPane.showMessageDialog(null,"No discount selected.");
-		// }
-
-
-		// 	POS.srcBtn.setEnabled(false);
-		// 	dispose();
-
-		// }
-
-		// else if(e.getSource() == rdBtn[0]){
-		// 	double discountNew = parseCut * 0.03;
-		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
-			
-		// }
-
-		// else if(e.getSource() == rdBtn[1]){
-		// 	double discountNew = parseCut * 0.25;
-		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
-			
-		// }
-
-		// else if(e.getSource() == rdBtn[2]){
-		// 	double discountNew = parseCut * 0.20;
-		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
-			
-		// }
-
-		// else if(e.getSource() == rdBtn[3]){
-		// 	double discountNew = parseCut * 0.15;
-		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
-			
-		// }
 			}
 
 	}

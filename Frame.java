@@ -91,7 +91,7 @@ public class Frame extends JFrame implements ActionListener{
 
 //This is the declaration for the main frame
 	void frameInventory(){
-
+		
 		
 
 		//the main frame properties
@@ -102,6 +102,7 @@ public class Frame extends JFrame implements ActionListener{
 		setResizable(false);
 		setUndecorated(true);
 		getContentPane().setBackground(gold);
+		
 
 		//declaring the properties for the close button
 		close = new JButton();

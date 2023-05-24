@@ -74,11 +74,6 @@ public class POS extends JFrame implements ActionListener{
 	int invoiceNum = 1000000;
 
 
-
-
-
-
-
 	//this part is for the table
 	String [][] posData = {};
 	String[] posHeader = {"Item Code", "Item Name", "Size", "Price", "Quantity", "Total"};
@@ -112,7 +107,14 @@ public class POS extends JFrame implements ActionListener{
 
 	static String[][] exp; 
 
+	static int rmAdd;
+
+
+	static int[] showStock = new int[20];
+
 	void pos(){
+
+		
 
 		setSize(1250,600);
 		setLocationRelativeTo(null);
@@ -121,6 +123,7 @@ public class POS extends JFrame implements ActionListener{
 		setResizable(false);
 		setUndecorated(true);
 		getContentPane().setBackground(darkBlue);
+		
 
 		frameBg = new ImageIcon(new ImageIcon("posImg/pos.jpg").getImage().getScaledInstance(1250,600, Image.SCALE_SMOOTH));
 		lblBg = new JLabel();
@@ -335,6 +338,8 @@ public class POS extends JFrame implements ActionListener{
 
 	
 
+
+
 	@Override
 	public void actionPerformed(ActionEvent e){
 
@@ -366,16 +371,16 @@ public class POS extends JFrame implements ActionListener{
 		else if (e.getSource() == srcBtn){
 
 			 if(quantity.getText().equals("")){
-		    	JOptionPane.showMessageDialog(this,"Please enter number into quantity.");		    	
+		    	JOptionPane.showMessageDialog(this,"Please enter number to quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);		    	
 		    }
 
 
 			 else if(quantity.getText().isEmpty()){
-		    	JOptionPane.showMessageDialog(this,"Please enter number into quantity.");		    	
+		    	JOptionPane.showMessageDialog(this,"Please enter number to quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);		    	
 		    }
 
 		     else if(quantity.getText().isBlank()){
-		    	JOptionPane.showMessageDialog(this,"Please enter number into quantity.");		    	
+		    	JOptionPane.showMessageDialog(this,"Please enter number to quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);		    	
 		    }
 
 		    else{
@@ -383,18 +388,23 @@ public class POS extends JFrame implements ActionListener{
 				try{
 					parsedQuantityNum = Integer.parseInt(quantity.getText());
 					if (parsedQuantityNum == 0) {
-						JOptionPane.showMessageDialog(this,"Quantity number cannot be zero.");
+						JOptionPane.showMessageDialog(this,"Quantity number cannot be zero.", "Zero Input", JOptionPane.ERROR_MESSAGE);
 					}
 
 					else if (parsedQuantityNum < 0) {
-						JOptionPane.showMessageDialog(this,"Quantity number cannot be negative number.");
+						JOptionPane.showMessageDialog(this,"Quantity number cannot be negative number.", "Negative Input", JOptionPane.ERROR_MESSAGE);
 					}
 
 					else{
+						transBtn[0].setEnabled(false);
+						transBtn[1].setEnabled(false);
+						transBtn[2].setEnabled(false);
+						transBtn[3].setEnabled(false);
 
-						ShowInventory sh = new ShowInventory();
-						sh.inventory();
-						sh.setVisible(true);
+						ShowInventory.sV=true;
+						ShowInventory.expBtn.doClick();
+
+						 
 					// sh.expBtn.doClick();
 					// ShowInventory.numQuanti = parsedQuantityNum;
 						posQuantity = parsedQuantityNum;
@@ -405,23 +415,17 @@ public class POS extends JFrame implements ActionListener{
 						ShowInventory.posRowCount = aRowCount;
 						srcBtn.setEnabled(false);
 
+						
+
 
 					}
 					
 
 
-
-					// ShowInventory.code = Integer.parseInt(String.valueOf(posTable.getValueAt(0,0)));
-					// // setter.doClick();
-
-
-					// sh.setVisible(true);
-
-
 				}
 
 				catch(Exception armand){
-					JOptionPane.showMessageDialog(null, "Please enter number");
+					JOptionPane.showMessageDialog(null, "Please enter valid input.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
 
 				}
 
@@ -446,12 +450,6 @@ public class POS extends JFrame implements ActionListener{
 
 			posDefTableModel.addRow(posVector);
 
-			// int b = 0;
-			// for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
-			// int valueTotal = Integer.parseInt(String.valueOf(posDefTableModel.getValueAt(a,5)));
-			// b+=valueTotal;
-			// lblNumTotal.setText(String.valueOf(b));
-			// }
 
 			try{
 
@@ -463,7 +461,7 @@ public class POS extends JFrame implements ActionListener{
 
 			else{
 
-				if(selRow == -1 && intRc == 0){System.out.println("Yes");}
+				if(selRow == -1 && intRc == 0){}
 				
 
 				else{
@@ -475,7 +473,6 @@ public class POS extends JFrame implements ActionListener{
 					String strTotal = posTable.getValueAt(a,5).toString();
 					double parNumTotal = Double.parseDouble(strTotal);
 
-					// int valueTotal = Integer.parseInt(String.valueOf(posDefTableModel.getValueAt(a,5)));
 					b+=parNumTotal;
 					String parB = String.format("\u20B1 %,.2f",b);
 					byte[] charset = parB.getBytes("UTF-8"); 
@@ -504,93 +501,6 @@ public class POS extends JFrame implements ActionListener{
 			
 			
 			
-
-
-
-			// if(Integer.parseInt(String.valueOf(posTable.getSelectedRow())) == -1){
-			// 	if(Integer.parseInt(String.valueOf(posTable.getRowCount())) ==0){
-			// 		System.out.println("0");
-			// 	}
-
-			// 	else{
-			// 		System.out.println("1");
-
-			// 		int b = 0;
-			// 		int c = 0;
-			// 		for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
-			// 		String strTotal = posDefTableModel.getValueAt(c,5).toString();
-			// 		int parNumTotal = Integer.parseInt(strTotal);
-
-			// 		// int valueTotal = Integer.parseInt(String.valueOf(posDefTableModel.getValueAt(a,5)));
-			// 		b+=parNumTotal;
-			// 		lblNumTotal.setText(String.valueOf(b));
-			// 		c++;
-			// 		}
-			// 	}
-
-
-			// }
-
-			
-				
-					// int b = 0;
-					// for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
-					// int valueTotal = Integer.parseInt(posDefTableModel.getValueAt(a,5).toString());
-					// b+=valueTotal;
-					// lblNumTotal.setText(String.valueOf(b));
-					// }
-
-				
-				
-
-			
-
-			// if(Integer.parseInt(String.valueOf(posTable.getRowCount())) ==0){}
-
-			// else{
-			// 	if (Integer.parseInt(String.valueOf(posTable.getSelectedRow())) == -1){
-
-			// 	}
-
-
-			// 	else{
-			// 		int b = 0;
-			// 		for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
-			// 		int valueTotal = Integer.parseInt(posDefTableModel.getValueAt(a,5).toString());
-			// 		b+=valueTotal;
-			// 		lblNumTotal.setText(String.valueOf(b));
-			// 		}
-			// 	}
-			// }
-
-			// else if (Integer.parseInt(String.valueOf(posTable.getSelectedRow())) == -1){
-
-			// }
-
-			// else{
-			// 	int b = 0;
-			// 	for(int a = 0; a<=Integer.parseInt(String.valueOf(posTable.getRowCount())); a++){
-			// 	int valueTotal = Integer.parseInt(posDefTableModel.getValueAt(a,5).toString());
-			// 	b+=valueTotal;
-			// 	lblNumTotal.setText(String.valueOf(b));
-			// 	}
-			// }
-
-
-			
-
-
-
-
-
-
-
-
-
-			// lblNumTotal.setText(String.valueOf(totalPc));
-			// System.out.println(itmcd);
-			// System.out.println(itmnm);
-			// System.out.println(itmst);
 		}
 
 
@@ -598,24 +508,197 @@ public class POS extends JFrame implements ActionListener{
 				int mm = posTable.getSelectedRow();
 
 			if(posTable.getSelectedRow() == -1){
-				JOptionPane.showMessageDialog(this,"Select row to delete.");
+				JOptionPane.showMessageDialog(this,"Please Select row to delete.", "No Selected Row", JOptionPane.ERROR_MESSAGE);
 			}
 			else if(posTable.isRowSelected(mm)){
 				int mainOption = JOptionPane.showConfirmDialog(this, "Are you sure to delete the selected row?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
 				if(mainOption == 0){
-
 					String zzz = posTable.getValueAt(mm,5).toString();
 					Double individual = Double.parseDouble(zzz);
+
+					int posTblStock = Integer.parseInt(posTable.getValueAt(mm,4).toString());
+					  
+
+					String posItemCd = posTable.getValueAt(mm,0).toString();
+				
+					ShowInventory show = new ShowInventory();
+
+					switch(posItemCd){
+						case "00001":
+							ShowInventory.stcPasser[0].doClick();
+							rmAdd = showStock[0] + posTblStock;
+							ShowInventory.ckBtn[0].doClick();
+							break;
+
+						case "00002":
+							ShowInventory.stcPasser[1].doClick();
+							rmAdd = showStock[1] + posTblStock;
+							ShowInventory.ckBtn[1].doClick();
+							break;
+
+						case "00003":
+							ShowInventory.stcPasser[2].doClick();
+							rmAdd = showStock[2] + posTblStock;
+							ShowInventory.ckBtn[2].doClick();
+							break;
+
+
+
+						case "00004":
+							ShowInventory.stcPasser[3].doClick();
+							rmAdd = showStock[3] + posTblStock;
+							ShowInventory.ckBtn[3].doClick();
+							break;
+
+
+
+						case "00005":
+							ShowInventory.stcPasser[4].doClick();
+							rmAdd = showStock[4] + posTblStock;
+							ShowInventory.ckBtn[4].doClick();
+							break;
+
+
+						case "00006":
+							ShowInventory.stcPasser[5].doClick();
+							rmAdd = showStock[5] + posTblStock;
+							ShowInventory.ckBtn[5].doClick();
+							break;
+
+
+
+						case "00007":
+							ShowInventory.stcPasser[6].doClick();
+							rmAdd = showStock[6] + posTblStock;
+							ShowInventory.ckBtn[6].doClick();
+							break;
+
+
+						case "00008":
+							ShowInventory.stcPasser[7].doClick();
+							rmAdd = showStock[7] + posTblStock;
+							ShowInventory.ckBtn[7].doClick();
+							break;
+
+
+
+						case "00009":
+							ShowInventory.stcPasser[8].doClick();
+							rmAdd = showStock[8] + posTblStock;
+							ShowInventory.ckBtn[8].doClick();
+							break;
+
+
+
+						case "00010":
+							ShowInventory.stcPasser[9].doClick();
+							rmAdd = showStock[9] + posTblStock;
+							ShowInventory.ckBtn[9].doClick();
+							break;
+
+
+
+						case "00011":
+							ShowInventory.stcPasser[10].doClick();
+							rmAdd = showStock[10] + posTblStock;
+							ShowInventory.ckBtn[10].doClick();
+							break;
+
+
+						case "00012":
+							ShowInventory.stcPasser[11].doClick();
+							rmAdd = showStock[11] + posTblStock;
+							ShowInventory.ckBtn[11].doClick();
+							break;
+
+
+
+
+						case "00013":
+							ShowInventory.stcPasser[12].doClick();
+							rmAdd = showStock[12] + posTblStock;
+							ShowInventory.ckBtn[12].doClick();
+							break;
+
+
+
+
+						case "00014":
+							ShowInventory.stcPasser[13].doClick();
+							rmAdd = showStock[13] + posTblStock;
+							ShowInventory.ckBtn[13].doClick();
+							break;
+
+
+						case "00015":
+							ShowInventory.stcPasser[14].doClick();
+							rmAdd = showStock[14] + posTblStock;
+							ShowInventory.ckBtn[14].doClick();
+							break;
+
+
+
+						case "00016":
+							
+							ShowInventory.stcPasser[15].doClick();
+							rmAdd = showStock[15] + posTblStock;
+							ShowInventory.ckBtn[15].doClick();
+							break;
+
+
+
+						case "00017":
+							ShowInventory.stcPasser[16].doClick();
+							rmAdd = showStock[16] + posTblStock;
+							ShowInventory.ckBtn[16].doClick();
+							break;
+
+
+						case "00018":
+							
+							ShowInventory.stcPasser[17].doClick();
+
+							rmAdd = showStock[17] + posTblStock;
+							ShowInventory.ckBtn[17].doClick();
+							break;
+
+
+						case "00019":
+							ShowInventory.stcPasser[18].doClick();
+							
+
+							rmAdd = showStock[18] + posTblStock;
+							ShowInventory.ckBtn[18].doClick();
+							break;
+
+
+						case "00020":
+							ShowInventory.stcPasser[19].doClick();
+							
+
+							rmAdd = showStock[19] + posTblStock;
+							ShowInventory.ckBtn[19].doClick();
+							break;
+
+
+
+
+
+					}
 
 					char peso = '\u20B1';
 					double yyy = b-individual;
 					String parB = String.format(peso + " %,.2f", yyy);
 					lblNumTotal.setText(parB);
 
+					ShowInventory showInventory = new ShowInventory();
+
+
 					posDefTableModel.removeRow(mm);
-					JOptionPane.showMessageDialog(this,"Successfully Deleted!");
+					JOptionPane.showMessageDialog(this,"Successfully Deleted!", "Sucess!", JOptionPane.INFORMATION_MESSAGE);
 					posTable.getSelectionModel().clearSelection();
+
 
 					b-=individual;
 					setter.doClick();
@@ -644,6 +727,8 @@ public class POS extends JFrame implements ActionListener{
 		else if (e.getSource() == transBtn[2]) {
 			Payment pm = new Payment();
 			pm.userPayment();
+
+
 			Receipt.recRow = posTable.getRowCount();
 
 			exp = new String [posTable.getRowCount()][6];
@@ -652,14 +737,13 @@ public class POS extends JFrame implements ActionListener{
 			
 				for (int d=0; d<6; d++) {
 					
-					// recVector.add(cd.posTable.getValueAt())
-					
 					exp[c][d] = posTable.getValueAt(c,d).toString();
-					// System.out.println(posTable.getValueAt(c,d).toString());
+					
 				}
 			}
 
 		}
+
 
 
 		else if(e.getSource() == setter){

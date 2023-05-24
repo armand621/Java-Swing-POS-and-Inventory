@@ -150,7 +150,6 @@ public class Receipt extends JFrame implements ActionListener{
 
 
 		POS abc = new POS();
-		System.out.println(recRow);
 
 
 		int labelsY = 460;

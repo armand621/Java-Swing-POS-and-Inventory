@@ -27,12 +27,13 @@ public class Dashboard extends JFrame implements ActionListener{
 
 	void userDashboard(){
 
-
+		
 		setSize(600,500);
 		setLayout(null);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
+		
 
 
 
@@ -96,8 +97,8 @@ public class Dashboard extends JFrame implements ActionListener{
 		else if(e.getSource() == btn[0]){
 			POS ps = new POS();
 			ps.pos();
-			// ShowInventory si = new ShowInventory();
-			// si.inventory();
+			ShowInventory si = new ShowInventory();
+			si.inventory();
 			dispose();
 		}
 
