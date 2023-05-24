@@ -33,9 +33,10 @@ public class loginFrame extends JFrame implements ActionListener{
 
 	ImageIcon loginBg, showPsk, hidePsk;
 	JLabel lblLoginBg;
-	 
+
 
 	void login(){
+		
 
 		setSize(500,320);
 		setLocationRelativeTo(null);
@@ -43,6 +44,7 @@ public class loginFrame extends JFrame implements ActionListener{
 		setLayout(null);
 		setUndecorated(true);
 		getContentPane().setBackground(new Color(0x222E50));
+		
 
 
 		lblLoginBg = new JLabel();
@@ -79,18 +81,6 @@ public class loginFrame extends JFrame implements ActionListener{
 		 closeBtn.setFocusable(false);
 		 closeBtn.addActionListener(this);
 
-		
-		// int txtFieldY = 123;
-		// for(int a = 0; a<=btnLabel.length-1; a++){
-		// 	txtField[a] = new JTextField();
-		// 	txtField[a].setBounds(190,txtFieldY, 180,35);
-		// 	txtField[a].setBorder(BorderFactory.createMatteBorder(0,0,2,0, new Color(0x222E50)));
-		// 	txtField[a].setFont(new Font("Arial", Font.BOLD, 15));
-		// 	txtField[a].setHorizontalAlignment(JTextField.CENTER);
-		// 	txtFieldY+=62;
-		// 	add(txtField[a]);
-		// }
-
 		 
 	 
 			fldUsername = new JTextField();
@@ -105,20 +95,6 @@ public class loginFrame extends JFrame implements ActionListener{
 			fldPsk.setFont(new Font("Arial", Font.BOLD, 15));
 			fldPsk.setHorizontalAlignment(JTextField.CENTER);
 			 
-		 
-
-
-
-
-
-		// int lblY = 100;
-		// for(int b = 0; b<=strLabel.length-1; b++){
-		// 	labels[b] = new JLabel();
-		// 	labels[b].setBounds(20,lblY, 120,35);
-		// 	labels[b].setText(strLabel[b]);
-		// 	lblY+=70;
-		// 	add(labels[b]);
-		// }
 
 
 		int btnX = 120;
@@ -160,33 +136,6 @@ public class loginFrame extends JFrame implements ActionListener{
 		}
 
 
-		// else if(e.getSource() == btn[1]){
-			
-		// 	String defUsername = "admin";
-		// 	String defPsk = "admin";
-
-		// 	String userInput = txtField[0].getText();
-		// 	String pskInput = txtField[1].getText();
-
-		// 	if(txtField[0].getText().isBlank() || txtField[1].getText().isBlank()){
-		// 		JOptionPane.showMessageDialog(null,"Please enter credentials");
-		// 	}
-
-		// 	else if(txtField[0].getText().isEmpty() || txtField[1].getText().isEmpty()){
-		// 		JOptionPane.showMessageDialog(null,"Please enter credentials");
-		// 	}
-
-		// 	else{
-		// 		if(userInput.equals(defUsername) && pskInput.equals(defPsk)){
-		// 			JOptionPane.showMessageDialog(null,"Sucessful!");
-		// 		}
-
-		// 		else{
-		// 			JOptionPane.showMessageDialog(null,"Username or Password is incorrect. Please try again.");
-		// 		}
-		// 	}
-
-		// }
 
 		else if(e.getSource() == btn[1]){
 				String defUsername = "admin";

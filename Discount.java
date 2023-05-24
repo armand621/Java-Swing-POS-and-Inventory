@@ -39,6 +39,8 @@ public class Discount extends JFrame implements ActionListener{
 
 
 	void userDiscount(){
+		
+
 		setSize(500,300);
 		setLocationRelativeTo(null);
 		setLayout(null);
@@ -46,6 +48,7 @@ public class Discount extends JFrame implements ActionListener{
 		setResizable(false);
 		setUndecorated(true);
 		getContentPane().setBackground(POS.darkBlue);
+		
 
 		int btnX = 50;
 		for(int a=0; a<=rdBtn.length-1; a++){
@@ -104,9 +107,6 @@ public class Discount extends JFrame implements ActionListener{
 	}
 
 	
-
-	// double total = Double.parseDouble(POS.lblNumTotal.getText());
-
 	@Override
 	public void actionPerformed(ActionEvent e){
 
@@ -118,6 +118,10 @@ public class Discount extends JFrame implements ActionListener{
 			char peso = '\u20B1';
 			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
 			POS.lblNumTotal.setText(parB);
+
+
+			POS.srcBtn.setEnabled(false);
+			dispose();
 			
 		}
 
@@ -126,6 +130,10 @@ public class Discount extends JFrame implements ActionListener{
 			char peso = '\u20B1';
 			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
 			POS.lblNumTotal.setText(parB);
+
+			
+			POS.srcBtn.setEnabled(false);
+			dispose();
 			
 
 		}
@@ -136,7 +144,9 @@ public class Discount extends JFrame implements ActionListener{
 			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
 			POS.lblNumTotal.setText(parB);
 			
-
+			
+			POS.srcBtn.setEnabled(false);
+			dispose();
 		}
 
 		else if(rdBtn[3].isSelected() == true){
@@ -145,18 +155,23 @@ public class Discount extends JFrame implements ActionListener{
 			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
 			POS.lblNumTotal.setText(parB);
 			
-
+			
+			POS.srcBtn.setEnabled(false);
+			dispose();
 		}
 
 		else{
-			JOptionPane.showMessageDialog(null,"No discount selected.");
+			JOptionPane.showMessageDialog(null,"No discount selected.","Error F01", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 
-			POS.srcBtn.setEnabled(false);
-			dispose();
+			// POS.srcBtn.setEnabled(false);
+			// dispose();
 
 		}
+
+
+
 
 		else if(e.getSource() == cancel){
 			POS.srcBtn.setEnabled(true);
@@ -164,29 +179,6 @@ public class Discount extends JFrame implements ActionListener{
 			dispose();
 		}
 
-		// else if(e.getSource() == rdBtn[0]){
-		// 	double discountNew = parseCut * 0.03;
-		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
-			
-		// }
-
-		// else if(e.getSource() == rdBtn[1]){
-		// 	double discountNew = parseCut * 0.25;
-		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
-			
-		// }
-
-		// else if(e.getSource() == rdBtn[2]){
-		// 	double discountNew = parseCut * 0.20;
-		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
-			
-		// }
-
-		// else if(e.getSource() == rdBtn[3]){
-		// 	double discountNew = parseCut * 0.15;
-		// 	POS.lblNumTotal.setText(String.valueOf(parseCut-discountNew));
-			
-		// }
 
 	}
 

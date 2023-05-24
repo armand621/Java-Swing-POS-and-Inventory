@@ -82,19 +82,27 @@ public class ShowInventory extends JFrame implements ActionListener{
 	JButton srcClear, btnAdd;
 
 	//this part is for the experiment button
-	JButton expBtn;
+	static JButton expBtn;
 
-	// static double numQuanti = POS.parsedQuantityNum;
+	static boolean sV;
+
+
+	static JButton gd,sd;
+
+	static JButton[] stcPasser = new JButton[20];
+	static JButton []ckBtn = new JButton[20];
+
 
 	void inventory(){
 
 		setSize(740,510);
 		setLocationRelativeTo(null);
 		setLayout(null);
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		// setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setResizable(false);
 		setUndecorated(true);
 		getContentPane().setBackground(new Color(0xf3f0f0));
+		
 
 
 		JPanel expan = new JPanel();
@@ -117,6 +125,48 @@ public class ShowInventory extends JFrame implements ActionListener{
 		expBtn.setVisible(false);
 		expBtn.addActionListener(this);
 		add(expBtn);
+
+
+		gd = new JButton();
+		gd.setBounds(122,10,100,20);
+		gd.setVisible(false);
+		gd.addActionListener(this);
+		add(gd);
+
+
+		
+		for(int zx=0; zx<stcPasser.length; zx++){
+			stcPasser[zx] = new JButton();
+			stcPasser[zx].setBounds(122,10,100,20);
+			stcPasser[zx].setVisible(false);
+			stcPasser[zx].addActionListener(this);
+			add(stcPasser[zx]);
+			 
+
+		}
+
+		
+		for(int vw =0; vw<stcPasser.length; vw++){
+			ckBtn[vw] = new JButton();
+			ckBtn[vw].setBounds(48,10,100,20);
+			ckBtn[vw].setVisible(false);
+			ckBtn[vw].addActionListener(this);
+			add(ckBtn[vw]);
+			 
+			
+
+		}
+
+
+
+
+
+		sd = new JButton();
+		sd.setBounds(122,10,100,20);
+		sd.setVisible(false);
+		sd.addActionListener(this);
+		add(sd);
+
 
 
 
@@ -227,7 +277,6 @@ public class ShowInventory extends JFrame implements ActionListener{
 		srcClear.setFocusable(false);
 		srcClear.setFont(arial15b);
 
-		// System.out.println(numQuanti);
 
 		add(btnAdd);
 		add(txtSearch);
@@ -236,28 +285,12 @@ public class ShowInventory extends JFrame implements ActionListener{
 		add(closeBtn);
 		add(expan);
 		
-		setVisible(false);
+		sV = false;
+	
 
 	}
 
 	
-	// int mm = table.getSelectedRow();
-
-	void getTableValue(){
-		int mm = table.getSelectedRow();
-		if(table.getRowCount() == -1){
-			String itmcd = table.getValueAt(mm,0).toString();
-			String itmnm = table.getValueAt(mm,1).toString();
-			String itmst = table.getValueAt(mm,4).toString();
-		
-			objPos.posDefTableModel.setValueAt(itmcd,0,0);
-			objPos.posDefTableModel.setValueAt(itmcd,0,1);
-			objPos.posDefTableModel.setValueAt(itmcd,0,2);
-		}	
-	}
-
-
-	// int mm;
 	static int code;
 	static int posRowCount;
 
@@ -269,48 +302,41 @@ public class ShowInventory extends JFrame implements ActionListener{
 			if(closeOpt==0){
 				setVisible(false);
 				POS.srcBtn.setEnabled(true);
-				// dispose();
-				// System.exit(0);
+
+				POS.transBtn[0].setEnabled(true);
+				POS.transBtn[1].setEnabled(true);
+				POS.transBtn[2].setEnabled(true);
+				POS.transBtn[3].setEnabled(true);
 			}
 		}
 
 
 		else if(e.getSource() == btnAdd){
 
-			// int mm = table.getSelectedRow();
-
 			if(table.getSelectedRow() == -1){
-				JOptionPane.showMessageDialog(null,"Please select item to add");
+				JOptionPane.showMessageDialog(null,"Please select item to add", "No Row Selected", JOptionPane.WARNING_MESSAGE);
 			}
 
 			else{
-				// String stock = table.getValueAt(mm,5).toString();
-				// int intStock = Integer.parseInt(stock);
+				
 				int mm = table.getSelectedRow();
 
 				String strStock = table.getValueAt(mm,5).toString();
-				System.out.println(strStock);
-				// double oldStock = Double.parseDouble(strStock);
-
-				System.out.println(POS.quantity.getText());
-
-
 				int parseStock = Integer.parseInt(strStock);
 
+				if (parseStock < Integer.parseInt(POS.quantity.getText())) {
+					JOptionPane.showMessageDialog(null,"Can't select item due to stock is less than quantity.", "Stock Problem",JOptionPane.ERROR_MESSAGE);
+				}
+
+
+
+				else{
+				
 				int newStock = parseStock - Integer.parseInt(POS.quantity.getText()) ;
 
-				System.out.println(newStock);
 
-				defTableModel.setValueAt(String.valueOf(newStock),0,0);
-				// defTableModel.setValueAt(String.valueOf(oldStock-numQuanti),mm,5);
-
-
-
-				// int stkVal = Integer.parseInt(permData[mm][5]);
-				// permData[mm][5] = String.valueOf(stkVal - numQuanti);
-
-
-
+				
+				defTableModel.setValueAt(String.valueOf(newStock),mm,5);
 
 				POS.itmcd = table.getValueAt(mm,0).toString();
 				POS.itmnm = table.getValueAt(mm,1).toString();
@@ -319,23 +345,24 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 				POS.adder.doClick();
 				setVisible(false);
-				JOptionPane.showMessageDialog(null,"Successfully Added!");
+				JOptionPane.showMessageDialog(null,"Successfully Added!","Sucess!", JOptionPane.INFORMATION_MESSAGE);
+				table.getSelectionModel().clearSelection();
 				
 				POS.srcBtn.setEnabled(true);
 				POS.setter.doClick();
+				
+
 				POS.quantity.setText("");
-				// numQuanti = POS.posQuantity;
+				POS.transBtn[0].setEnabled(true);
+				POS.transBtn[1].setEnabled(true);
+				POS.transBtn[2].setEnabled(true);
+				POS.transBtn[3].setEnabled(true);
+
 				
+			}
 
 
-				
-				// numQuanti = 0;
-				// srcClear.doClick();
-				// expBtn.doClick();
-				// int newStock = intStock - numQuanti;
-				// defTableModel.setValueAt(String.valueOf(newStock), mm,5);
-				// // setVisible(false);
-				// System.out.println(newStock);
+
 			}
 
 
@@ -354,34 +381,111 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 
 		else if (e.getSource() == expBtn){
-			POS j = new POS();
-			// System.out.println(code);
-			
+			if (sV == false) {
+				setVisible(false);
+				
+			}
+
+			else{
+				setVisible(true);
+			}
 		
+		}
 
-			
-				// System.out.println("true");
-				// System.out.println(ps.posDefTableModel.getRowCount());
-				// System.out.println(posRowCount);
 
-			
 
-			
-				// System.out.println("edadf");
-			// System.out.println(POS.posTable.getValueAt(0,0).toString());
-	
 
-			// System.out.println("Successfully Clicked");
+		else if (e.getSource() == stcPasser[0]) {
+			POS.showStock[0] = Integer.parseInt(table.getValueAt(0,5).toString());
+		}
 
-			// switch(code){
-			// 	case "00001":
-			// 		String next = ps.posTable.getValueAt(0,4).toString();
-			// 		defTableModel.setValueAt(Integer.parseInt(next)-numQuanti,0,5);
-			// }
-			
+		else if (e.getSource() == stcPasser[1]) {
+			POS.showStock[1] = Integer.parseInt(table.getValueAt(1,5).toString());
+		}
 
-	
+		else if (e.getSource() == stcPasser[2]) {
+			POS.showStock[2] = Integer.parseInt(table.getValueAt(2,5).toString());
+		}
 
+		else if (e.getSource() == stcPasser[3]) {
+			POS.showStock[3] = Integer.parseInt(table.getValueAt(3,5).toString());
+		}
+
+		else if (e.getSource() == stcPasser[4]) {
+			POS.showStock[4] = Integer.parseInt(table.getValueAt(4,5).toString());
+		}
+
+		else if (e.getSource() == stcPasser[5]) {
+			POS.showStock[5] = Integer.parseInt(table.getValueAt(5,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[6]) {
+			POS.showStock[6] = Integer.parseInt(table.getValueAt(6,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[7]) {
+			POS.showStock[7] = Integer.parseInt(table.getValueAt(7,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[8]) {
+			POS.showStock[8] = Integer.parseInt(table.getValueAt(8,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[9]) {
+			POS.showStock[9] = Integer.parseInt(table.getValueAt(9,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[10]) {
+			POS.showStock[10] = Integer.parseInt(table.getValueAt(10,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[11]) {
+			POS.showStock[11] = Integer.parseInt(table.getValueAt(11,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[12]) {
+			POS.showStock[12] = Integer.parseInt(table.getValueAt(12,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[13]) {
+			POS.showStock[13] = Integer.parseInt(table.getValueAt(13,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[14]) {
+			POS.showStock[14] = Integer.parseInt(table.getValueAt(14,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[15]) {
+			POS.showStock[15] = Integer.parseInt(table.getValueAt(15,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[16]) {
+			POS.showStock[16] = Integer.parseInt(table.getValueAt(16,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[17]) {
+			POS.showStock[17] = Integer.parseInt(table.getValueAt(17,5).toString());
+		}
+
+
+		else if (e.getSource() == stcPasser[18]) {
+			POS.showStock[18] = Integer.parseInt(table.getValueAt(18,5).toString());
+		}
+
+		else if (e.getSource() == stcPasser[19]) {
+			POS.showStock[19] = Integer.parseInt(table.getValueAt(19,5).toString());
 		}
 
 
@@ -393,6 +497,98 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 
 
+		else if (e.getSource() == ckBtn[0]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),0,5);
+		}
+
+		else if (e.getSource() == ckBtn[1]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),1,5);
+		}
+
+		else if (e.getSource() == ckBtn[2]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),2,5);
+		}
+
+		else if (e.getSource() == ckBtn[3]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),3,5);
+		}
+
+		else if (e.getSource() == ckBtn[4]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),4,5);
+		}
+
+		else if (e.getSource() == ckBtn[5]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),5,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[6]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),6,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[7]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),7,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[8]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),8,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[9]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),9,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[10]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),10,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[11]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),11,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[12]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),12,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[13]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),13,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[14]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),14,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[15]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),15,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[16]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),16,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[17]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),17,5);
+		}
+
+
+		else if (e.getSource() == ckBtn[18]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),18,5);
+		}
+
+		else if (e.getSource() == ckBtn[19]) {
+			defTableModel.setValueAt(String.valueOf(POS.rmAdd),19,5);
+		}
 
 
 		//do not delete the two braces below
