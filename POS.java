@@ -274,6 +274,7 @@ public class POS extends JFrame implements ActionListener{
    		quantity.setBounds(40,150,200,35);
    		quantity.setOpaque(false);
    		quantity.setBorder(BorderFactory.createMatteBorder(0,0,2,0,darkBlue));
+   		quantity.setFont(arial15b);
    		add(quantity);
 
    		//this part is for the button for the search item
@@ -742,6 +743,22 @@ public class POS extends JFrame implements ActionListener{
 				}
 			}
 
+		}
+
+		else if (e.getSource() == transBtn[3]) {
+			int closeOpt = JOptionPane.showConfirmDialog(this, "Are you sure to cancel? Pressing YES will return you to dashboard.", "Confirmation", JOptionPane.YES_NO_OPTION);
+			if (closeOpt == 0) {
+				
+			dispose();
+			ShowInventory sm = new ShowInventory();
+			sm.dispose();
+
+			Dashboard db = new Dashboard();
+			db.userDashboard();
+
+		}
+
+			
 		}
 
 

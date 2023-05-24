@@ -338,6 +338,21 @@ public class ShowInventory extends JFrame implements ActionListener{
 				
 				defTableModel.setValueAt(String.valueOf(newStock),mm,5);
 
+					int reOrd = Integer.parseInt(table.getValueAt(0,6).toString());
+
+					if(newStock<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",mm,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",mm,7);
+						
+					}
+
+
+
+
 				POS.itmcd = table.getValueAt(mm,0).toString();
 				POS.itmnm = table.getValueAt(mm,1).toString();
 				POS.itmst = table.getValueAt(mm,4).toString();
@@ -499,95 +514,337 @@ public class ShowInventory extends JFrame implements ActionListener{
 
 		else if (e.getSource() == ckBtn[0]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),0,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(0,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",0,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",0,7);
+						
+					}
+
+
 		}
 
 		else if (e.getSource() == ckBtn[1]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),1,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(1,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",1,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",1,7);
+						
+					}
 		}
 
 		else if (e.getSource() == ckBtn[2]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),2,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(2,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",2,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",2,7);
+						
+					}
 		}
 
 		else if (e.getSource() == ckBtn[3]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),3,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(3,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",3,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",3,7);
+						
+					}
 		}
 
 		else if (e.getSource() == ckBtn[4]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),4,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(4,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",4,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",4,7);
+						
+					}
 		}
 
 		else if (e.getSource() == ckBtn[5]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),5,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(5,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",5,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",5,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[6]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),6,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(6,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",6,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",6,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[7]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),7,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(7,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",7,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",7,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[8]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),8,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(8,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",8,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",8,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[9]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),9,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(9,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",9,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",9,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[10]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),10,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(10,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",10,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",10,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[11]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),11,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(11,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",11,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",11,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[12]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),12,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(12,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",12,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",12,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[13]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),13,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(13,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",13,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",13,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[14]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),14,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(14,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",14,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",14,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[15]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),15,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(15,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",15,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",15,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[16]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),16,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(16,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",16,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",16,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[17]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),17,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(17,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",17,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",17,7);
+						
+					}
 		}
 
 
 		else if (e.getSource() == ckBtn[18]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),18,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(18,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",18,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",18,7);
+						
+					}
 		}
 
 		else if (e.getSource() == ckBtn[19]) {
 			defTableModel.setValueAt(String.valueOf(POS.rmAdd),19,5);
+
+			int reOrd = Integer.parseInt(table.getValueAt(19,6).toString());
+
+					if(POS.rmAdd<reOrd){
+				
+						defTableModel.setValueAt("Low Stocks",19,7);
+					}
+
+					else{
+						defTableModel.setValueAt("High Stocks",19,7);
+						
+					}
 		}
 
 
