@@ -30,13 +30,14 @@ public class Discount extends JFrame implements ActionListener{
 	JButton apply,cancel;
 
 
-	String totalStr = POS.lblNumTotal.getText();
-	String total1 = totalStr.replace(',',' ');
-	String total2 = total1.replace(" ", "");
-	int strLn = total2.length();
-	String cutted = total2.substring(1,strLn).trim();
-	double parseCut = Double.parseDouble(cutted);
+	static String totalStr = POS.lblNumTotal.getText();
+	static String total1 = totalStr.replace(',',' ');
+	static String total2 = total1.replace(" ", "");
+	static int strLn = total2.length();
+	static String cutted = total2.substring(1,strLn).trim();
+	static double parseCut = Double.parseDouble(cutted);
 
+	static int other = -1;
 
 	void userDiscount(){
 		
@@ -118,11 +119,11 @@ public class Discount extends JFrame implements ActionListener{
 			char peso = '\u20B1';
 			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
 			POS.lblNumTotal.setText(parB);
-
-
+			other = 0;
 			POS.srcBtn.setEnabled(false);
 			dispose();
-			
+			POS.transBtn[1].setEnabled(false);
+			POS.transBtn[0].setEnabled(false);
 		}
 
 		else if(rdBtn[1].isSelected() == true){
@@ -131,10 +132,11 @@ public class Discount extends JFrame implements ActionListener{
 			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
 			POS.lblNumTotal.setText(parB);
 
-			
+			other = 1;
 			POS.srcBtn.setEnabled(false);
 			dispose();
-			
+			POS.transBtn[1].setEnabled(false);
+			POS.transBtn[0].setEnabled(false);
 
 		}
 
@@ -143,10 +145,11 @@ public class Discount extends JFrame implements ActionListener{
 			char peso = '\u20B1';
 			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
 			POS.lblNumTotal.setText(parB);
-			
-			
+			POS.transBtn[0].setEnabled(false);
+			other = 2;
 			POS.srcBtn.setEnabled(false);
 			dispose();
+			POS.transBtn[1].setEnabled(false);
 		}
 
 		else if(rdBtn[3].isSelected() == true){
@@ -154,19 +157,17 @@ public class Discount extends JFrame implements ActionListener{
 			char peso = '\u20B1';
 			String parB = String.format( peso + " %,.2f",parseCut-discountNew);
 			POS.lblNumTotal.setText(parB);
-			
-			
+			POS.transBtn[0].setEnabled(false);
+			other = 3;
 			POS.srcBtn.setEnabled(false);
 			dispose();
+			POS.transBtn[1].setEnabled(false);
 		}
 
 		else{
 			JOptionPane.showMessageDialog(null,"No discount selected.","Error F01", JOptionPane.INFORMATION_MESSAGE);
 		}
 
-
-			// POS.srcBtn.setEnabled(false);
-			// dispose();
 
 		}
 
