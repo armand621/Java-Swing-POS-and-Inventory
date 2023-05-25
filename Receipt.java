@@ -31,8 +31,10 @@ public class Receipt extends JFrame implements ActionListener{
 	Font arial0b = new Font("Arial", Font.BOLD,10);
 	Font arial12b = new Font("Arial", Font.BOLD,12);
 	Font arial15b = new Font("Arial", Font.BOLD,16);
+	Font arial13b = new Font("Arial", Font.BOLD,13);
 	Font arial18b = new Font("Arial", Font.BOLD,18);
 	Font arial23b = new Font("Arial", Font.BOLD,23);
+
 	
 
 	//this part is for the table
@@ -58,11 +60,10 @@ public class Receipt extends JFrame implements ActionListener{
 	JLabel[] lbl = new JLabel[texts.length];
 
 
-	static String[] str = {"","",""};
+	static String[] str = {"","","","",""};
 	static JLabel[] labels = new JLabel[str.length]; 
 
-	
-
+	JLabel invoice;
 
 	void clientReceipt(){
 
@@ -117,6 +118,13 @@ public class Receipt extends JFrame implements ActionListener{
 		lbl[4].setFont(arial0b);
 		lbl[4].setText("TIME: "+times.format(now));
 
+		invoice = new JLabel();
+		invoice.setText("Invoie Number: 1000000");
+		invoice.setFont(arial0b);
+		invoice.setBounds(0,115,400,20);
+		invoice.setHorizontalAlignment(JLabel.CENTER);
+		invoice.setForeground(POS.darkBlue);
+		add(invoice);
 
 
 
@@ -152,16 +160,16 @@ public class Receipt extends JFrame implements ActionListener{
 		POS abc = new POS();
 
 
-		int labelsY = 460;
+		int labelsY = 444;
 		for(int g =0; g<=labels.length-1; g++){
 			labels[g] = new JLabel();
 			labels[g].setText(str[g]);
-			labels[g].setBounds(0, labelsY, 400, 30);
+			labels[g].setBounds(0, labelsY, 400, 20);
 			labels[g].setForeground(POS.darkBlue);
-			labels[g].setFont(arial15b);
+			labels[g].setFont(arial13b);
 			labels[g].setHorizontalAlignment(JLabel.CENTER);
 			add(labels[g]);
-			labelsY+=40;
+			labelsY+=32;
 		
 		}
 
@@ -183,34 +191,65 @@ public class Receipt extends JFrame implements ActionListener{
 		tblmodel.getColumn(3).setPreferredWidth(45);
 		tblmodel.getColumn(4).setPreferredWidth(45);
 		
-		// for(int c=0; c<recRow; c++){
-		// 		Receipt rv = new Receipt();
-		// 		for (int d =0; d<6 ;d++ ) {
-		// 			POS cd = new POS();
-		// 			// recVector.add(cd.posTable.getValueAt())
-					
-		// 			recVector.add(abc.posDefTableModel.getValueAt(c,d).toString());
-		// 		}
-		// 		recDefTableModel.addRow(recVector);
-		// 		recVector = new Vector<String>();
-		// 	}
+		
+		if (Discount.other == 0) {
 
+			char peso1 = '\u20B1';
+			double discountNew00 = Discount.parseCut * 0.03;
+			labels[0].setText("TOTAL..........: " + String.format(peso1 + " %,.2f", Discount.parseCut));
+			double samsam00 = Double.parseDouble(Payment.numPayment.getText());
+			labels[1].setText("DISCOUNT.....: " + String.format(peso1+" %,.2f ",discountNew00) +" (St-3%)");
+			labels[2].setText("NEW TOTAL........: " + String.format(peso1+" %,.2f ",Discount.parseCut - discountNew00));
+			labels[3].setText("PAYMENT........: " + String.format(peso1+" %,.2f ",samsam00));
+
+			labels[4].setText("CHANGE........: " + String.format(peso1+" %,.2f ",samsam00 - (Discount.parseCut - discountNew00)));
+			
+		}
+
+		else if (Discount.other == 1) {
+			char peso1 = '\u20B1';
+			double discountNew1 = Discount.parseCut * 0.25;
+			labels[0].setText("TOTAL..........: " + String.format(peso1 + " %,.2f", Discount.parseCut));
+			double samsam1 = Double.parseDouble(Payment.numPayment.getText());
+			labels[1].setText("DISCOUNT.....: " + String.format(peso1+" %,.2f ",discountNew1) +" (RC-25%)");
+			labels[2].setText("NEW TOTAL........: " + String.format(peso1+" %,.2f ",Discount.parseCut - discountNew1));
+			labels[3].setText("PAYMENT........: " + String.format(peso1+" %,.2f ",samsam1));
+
+			labels[4].setText("CHANGE........: " + String.format(peso1+" %,.2f ",samsam1 - (Discount.parseCut - discountNew1)));
+			
+		}
 	
-		
 
-		
-			// for(int c=0; c<recRow; c++){
-			// 	for (int d =0; d<6 ;d++ ) {
-			// 		POS cd = new POS();
-			// 		// recVector.add(cd.posTable.getValueAt())
-			// 		System.out.println((cd.posVector.getDataVector().elementAt(c)).elementAt(d));
-			// 	}
-			// }
+	else if (Discount.other == 2) {
+			char peso1 = '\u20B1';
+			double discountNew2 = Discount.parseCut * 0.20;
+			labels[0].setText("TOTAL..........: " + String.format(peso1 + " %,.2f", Discount.parseCut));
+			double samsam2 = Double.parseDouble(Payment.numPayment.getText());
+			labels[1].setText("DISCOUNT.....: " + String.format(peso1+" %,.2f ",discountNew2) +" (Sc/Pwd-3%)");
 
+			labels[2].setText("NEW TOTAL........: " + String.format(peso1+" %,.2f ",Discount.parseCut - discountNew2));
+			labels[3].setText("PAYMENT........: " + String.format(peso1+" %,.2f ",samsam2));
+
+			labels[4].setText("CHANGE........: " + String.format(peso1+" %,.2f ",samsam2-(Discount.parseCut - discountNew2)));
+			
+		}
 	
-		
 
+	else if (Discount.other == 3) {
+			char peso1 = '\u20B1';
+			double discountNew3 = Discount.parseCut * 0.15;
+			labels[0].setText("TOTAL..........: " + String.format(peso1 + " %,.2f", Discount.parseCut));
+			double samsam3 = Double.parseDouble(Payment.numPayment.getText());
+			labels[1].setText("DISCOUNT.....: " + String.format(peso1+" %,.2f ",discountNew3) +" (Emp-15%)");
 
+			labels[2].setText("NEW TOTAL........: " + String.format(peso1+" %,.2f ",Discount.parseCut - discountNew3));
+			labels[3].setText("PAYMENT........: " + String.format(peso1+" %,.2f ",samsam3));
+
+			labels[4].setText("CHANGE........: " + String.format(peso1+" %,.2f ",samsam3-(Discount.parseCut - discountNew3)));
+			
+		}
+	
+	
 
 		add(expan);
 
@@ -223,7 +262,9 @@ public class Receipt extends JFrame implements ActionListener{
 
 		if(gt.getSource() == closeBtn){
 			System.exit(0);
+
 		}
+
 
 	}
 

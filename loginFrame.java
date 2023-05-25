@@ -171,8 +171,8 @@ public class loginFrame extends JFrame implements ActionListener{
 
 
 		else if(e.getSource() == pskBtn[0]){
-			this.remove(pskBtn[0]);
-			this.add(pskBtn[1]);
+			remove(pskBtn[0]);
+			add(pskBtn[1]);
 			fldPsk.setEchoChar('*');
 			pskBtn[0].setFocusable(false);
 			pskBtn[1].setFocusable(false);
@@ -180,8 +180,8 @@ public class loginFrame extends JFrame implements ActionListener{
 
 
 		else if(e.getSource() == pskBtn[1]){
-			this.remove(pskBtn[1]);
-			this.add(pskBtn[0]);
+			remove(pskBtn[1]);
+			add(pskBtn[0]);
 			fldPsk.setEchoChar((char)0);
 			pskBtn[0].setFocusable(false);
 			pskBtn[1].setFocusable(false);
@@ -190,9 +190,9 @@ public class loginFrame extends JFrame implements ActionListener{
 		
 
 		else if(e.getSource() == closeBtn){
-			int closeOpt = JOptionPane.showConfirmDialog(this, "Are you sure to exit?", "Confirmation", JOptionPane.YES_NO_OPTION);
+			int closeOpt = JOptionPane.showConfirmDialog(null, "Are you sure to exit?", "Confirmation", JOptionPane.YES_NO_OPTION);
 			if(closeOpt==0){
-				dispose();
+				System.exit(0);
 			}
 		}
 

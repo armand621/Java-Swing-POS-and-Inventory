@@ -37,6 +37,7 @@ public class Payment extends JFrame implements ActionListener{
 	double parseCut = Double.parseDouble(cutted);
 
 	static String parB;
+	
 
 
 	void userPayment(){
@@ -49,9 +50,8 @@ public class Payment extends JFrame implements ActionListener{
 		setResizable(false);
 		setUndecorated(true);
 		getContentPane().setBackground(POS.darkBlue);
-		
 
-		
+
 		lblDisc.setText("Payment");
 		lblDisc.setFont(arial18b);
 		lblDisc.setBounds(0,0,500,40);
@@ -94,8 +94,8 @@ public class Payment extends JFrame implements ActionListener{
 		cancel.setText("Cancel");
 		cancel.setFont(arial18b);
 		cancel.addActionListener(this);
-		add(cancel);		
-		
+		add(cancel);
+
 
 		setVisible(true);
 	}
@@ -146,7 +146,7 @@ public class Payment extends JFrame implements ActionListener{
 						PmSucess.labels[5].setSize(200,30);
 
 						PmSucess.labels[1].setText(POS.lblNumTotal.getText());
-
+						
 						dispose();
 
 					}
@@ -165,11 +165,126 @@ public class Payment extends JFrame implements ActionListener{
 
 
 		else if(e.getSource() == cancel){
-			POS.srcBtn.setEnabled(true);
-			POS.transBtn[1].setEnabled(true);
+			// POS.srcBtn.setEnabled(true);
+			// POS.transBtn[1].setEnabled(true);
 			dispose();
 		}
 
+
+
+
+		// else if (e.getSource() == part2[0]) {
+		// 	forExperiment[0].doClick();
+		// }
+
+
+		// else if (e.getSource() == part2[1]) {
+		// 	forExperiment[1].doClick();
+		// }
+
+
+		// else if (e.getSource() == part2[2]) {
+		// 	forExperiment[2].doClick();
+		// }
+
+
+		// else if (e.getSource() == part2[3]) {
+		// 	forExperiment[3].doClick();
+		// }
+
+
+
+
+
+
+
+
+		// else if (e.getSource() == forExperiment[0]) {
+		// 	double discountNew = Discount.parseCut * 0.03;
+		// 	//this part is for setting the total of the receipt
+		// 	Receipt.labels0 = ("TOTAL..........: " + String.valueOf(Discount.parseCut));
+		// 	// labels[0].setText("TOTAL..........: " + String.valueOf(Discount.parseCut));
+		
+		// 	double samsam = Double.parseDouble(numPayment.getText());
+		// 	char peso1 = '\u20B1';
+
+		// 	// labels[1].setText("PAYMENT........: " + String.format(peso+" %,.2f ",samsam));
+		// 	Receipt.labels1 = ("DISCOUNT.....: " + String.format(peso1+" %,.2f ",discountNew) +" (St-3%)");
+
+		// 	// labels[2].setText("CHANGE........: " + Payment.parB);
+		// 	Receipt.labels2 = ("PAYMENT........: " + String.format(peso1+" %,.2f ",samsam));
+
+		// 	Receipt.labels3 = ("CHANGE........: " + String.format(peso1+" %,.2f ",samsam-Discount.parseCut));
+
+
+
+
+			
+		// }
+
+		// else if (e.getSource() == forExperiment[1]) {
+		// 	double discountNew = Discount.parseCut * 0.25;
+		// 	//this part is for setting the total of the receipt
+		// 	Receipt.labels0 = ("TOTAL..........: " + String.valueOf(Discount.parseCut));
+		// 	// labels[0].setText("TOTAL..........: " + String.valueOf(Discount.parseCut));
+		
+		// 	double samsam = Double.parseDouble(numPayment.getText());
+		// 	char peso1 = '\u20B1';
+
+		// 	// labels[1].setText("PAYMENT........: " + String.format(peso+" %,.2f ",samsam));
+		// 	Receipt.labels1 = ("DISCOUNT.....: " + String.format(peso1+" %,.2f ",discountNew) +" (RC-25%)");
+
+		// 	// labels[2].setText("CHANGE........: " + Payment.parB);
+		// 	Receipt.labels2 = ("PAYMENT........: " + String.format(peso1+" %,.2f ",samsam));
+
+		// 	Receipt.labels3 = ("CHANGE........: " + String.format(peso1+" %,.2f ",samsam-Discount.parseCut));
+			
+		// }
+
+		// else if (e.getSource() == forExperiment[2]) {
+		// 	double discountNew = Discount.parseCut * 0.20;
+		// 	//this part is for setting the total of the receipt
+		// 	Receipt.labels0 = ("TOTAL..........: " + String.valueOf(Discount.parseCut));
+		// 	// labels[0].setText("TOTAL..........: " + String.valueOf(Discount.parseCut));
+		
+		// 	double samsam = Double.parseDouble(numPayment.getText());
+		// 	char peso1 = '\u20B1';
+
+		// 	// labels[1].setText("PAYMENT........: " + String.format(peso+" %,.2f ",samsam));
+		// 	Receipt.labels1 = ("DISCOUNT.....: " + String.format(peso1+" %,.2f ",discountNew) +" (Sc/Pwd-3%)");
+
+		// 	// labels[2].setText("CHANGE........: " + Payment.parB);
+		// 	Receipt.labels2 = ("PAYMENT........: " + String.format(peso1+" %,.2f ",samsam));
+
+		// 	Receipt.labels3 = ("CHANGE........: " + String.format(peso1+" %,.2f ",samsam-Discount.parseCut));
+			
+		// }
+
+		// else if (e.getSource() == forExperiment[3]) {
+		// 	double discountNew = Discount.parseCut * 0.15;
+		// 	//this part is for setting the total of the receipt
+		// 	Receipt.labels0 = ("TOTAL..........: " + String.valueOf(Discount.parseCut));
+		// 	// labels[0].setText("TOTAL..........: " + String.valueOf(Discount.parseCut));
+		
+		// 	double samsam = Double.parseDouble(numPayment.getText());
+		// 	char peso1 = '\u20B1';
+
+		// 	// labels[1].setText("PAYMENT........: " + String.format(peso+" %,.2f ",samsam));
+		// 	Receipt.labels1 = ("DISCOUNT.....: " + String.format(peso1+" %,.2f ",discountNew) +" (Emp-15%)");
+
+		// 	// labels[2].setText("CHANGE........: " + Payment.parB);
+		// 	Receipt.labels2 = ("PAYMENT........: " + String.format(peso1+" %,.2f ",samsam));
+
+		// 	Receipt.labels3 = ("CHANGE........: " + String.format(peso1+" %,.2f ",samsam-Discount.parseCut));
+			
+		// }
+
+
+
+
+
+
+//do not delete the two curly braces below
 	
 			}
 

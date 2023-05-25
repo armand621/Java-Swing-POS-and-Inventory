@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 public class POS extends JFrame implements ActionListener{
 
 	JButton closeBtn;
-	static JButton hideClose;
+	static JButton hideClose, hideClose1;
 
 	static Color gold = new Color(0xFCCB06);
 	static Color darkBlue = new Color(0x222E50);
@@ -163,6 +163,17 @@ public class POS extends JFrame implements ActionListener{
 		 hideClose.setVisible(false);
 		 
 		 add(hideClose);
+
+
+		 hideClose1 = new JButton();
+		 hideClose1.setBounds(23,50,50,20);
+		 hideClose1.setBackground(new Color(0x800000));
+		 hideClose1.setForeground(Color.WHITE);
+		 hideClose1.addActionListener(this);
+		 hideClose1.setVisible(false);
+		 
+		 add(hideClose1);
+
 
 
 
@@ -746,15 +757,10 @@ public class POS extends JFrame implements ActionListener{
 		}
 
 		else if (e.getSource() == transBtn[3]) {
-			int closeOpt = JOptionPane.showConfirmDialog(this, "Are you sure to cancel? Pressing YES will return you to dashboard.", "Confirmation", JOptionPane.YES_NO_OPTION);
+			int closeOpt = JOptionPane.showConfirmDialog(this, "Are you sure to cancel?", "Confirmation", JOptionPane.YES_NO_OPTION);
 			if (closeOpt == 0) {
 				
-			dispose();
-			ShowInventory sm = new ShowInventory();
-			sm.dispose();
-
-			Dashboard db = new Dashboard();
-			db.userDashboard();
+			System.exit(0);
 
 		}
 
@@ -780,6 +786,13 @@ public class POS extends JFrame implements ActionListener{
 
 		else if(e.getSource() == hideClose){
 			dispose();
+			// System.exit(0);
+		}
+
+
+		else if(e.getSource() == hideClose1){
+			// dispose();
+			System.exit(0);
 		}
 	}
 
